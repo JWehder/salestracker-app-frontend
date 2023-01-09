@@ -10,13 +10,13 @@ function App() {
   return (
     <div className="App">
       <div className="webpageHeader">
-            <h1>Sales Tracker</h1>
+            <h1>Nut Sales Tracker</h1>
             <hr></hr>
       </div>
-      <Button onClick={() => setFormActive(!formIsActive)} variant="primary">Create Order</Button>
+      <Button onClick={() => setFormActive(!formIsActive)} variant="primary">Create Order +</Button>
       <div>
-        <hr></hr>
-        {formIsActive ? <OrderForm /> : ""}
+        
+        {formIsActive ? <><hr></hr> <OrderForm /></> : ""}
         <hr></hr>
       </div>
       <div>

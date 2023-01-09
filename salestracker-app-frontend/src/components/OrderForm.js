@@ -38,14 +38,10 @@ function OrderForm() {
                     id="inlineFormInput"
                 />
                 </Form.Group>
-                <Form.Group as={Col}>
-                <Button type="submit" className="mb-2">
-                    Submit
-                </Button>
-                </Form.Group>
             </Row>
-
-        
+            <Button type="submit" className="mb-2">
+                    Submit Order
+            </Button>
         </Form>
   );
 }
