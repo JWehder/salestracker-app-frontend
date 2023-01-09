@@ -3,21 +3,19 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import AddProductInputs from "./AddProductInputs";
 
 function OrderForm() {
-    const [numberOfProducts, setNumberOfProducts] = useState([1])
+    const [numberOfProducts, setNumberOfProducts] = useState(1)
 
     function handleAdd() {
-        setNumberOfProducts(numberOfProducts.push(1))
+        setNumberOfProducts(numberOfProducts + 1)
         console.log(numberOfProducts)
     }
 
-    const productsToDisplay = numberOfProducts.map(() => {
+    const productsToDisplay = Array(numberOfProducts).map(() => {
         return ( 
-
+            <AddProductInputs key= {}
         )
     })
 
