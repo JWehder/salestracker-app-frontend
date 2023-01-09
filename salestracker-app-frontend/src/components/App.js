@@ -13,9 +13,11 @@ function App() {
             <h1>Sales Tracker</h1>
             <hr></hr>
       </div>
-      <Button onClick={() => setFormActive(!formIsActive)} variant="primary">Primary</Button>
+      <Button onClick={() => setFormActive(!formIsActive)} variant="primary">Create Order</Button>
       <div>
+        <hr></hr>
         {formIsActive ? <OrderForm /> : ""}
+        <hr></hr>
       </div>
       <div>
         <OrderTable />

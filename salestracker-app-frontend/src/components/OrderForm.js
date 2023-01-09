@@ -8,18 +8,18 @@ import Button from 'react-bootstrap/Button';
 function OrderForm() {
     return (
         <Form>
-            <Row>
-                <Col>
+            <Row className="mb-3">
+                <Col xs="auto">
                 <Form.Label>Salesperson First Name</Form.Label>
-                <Form.Control placeholder="First name" />
+                <Form.Control type="text" placeholder="First name" />
                 </Col>
-                <Col>
+                <Col xs="auto">
                 <Form.Label>Salesperson Last Name</Form.Label>
-                <Form.Control placeholder="Last name" />
+                <Form.Control type="text" placeholder="Last name" />
                 </Col>
             </Row>
-            <Row>
-                <Col>
+            <Row className="mb-3">
+                <Col xs="auto">
                 <Form.Label>Product</Form.Label>
                 <FloatingLabel controlId="floatingSelectGrid" label="Select a nut">
                 <Form.Select>
