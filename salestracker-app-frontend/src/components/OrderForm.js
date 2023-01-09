@@ -9,14 +9,14 @@ function OrderForm() {
     return (
         <Form>
             <Row className="mb-3">
-                <Col xs="auto">
+                <Form.Group as={Col}>
                 <Form.Label>Salesperson First Name</Form.Label>
                 <Form.Control type="text" placeholder="First name" />
-                </Col>
-                <Col xs="auto">
+                </Form.Group>
+                Form
                 <Form.Label>Salesperson Last Name</Form.Label>
                 <Form.Control type="text" placeholder="Last name" />
-                </Col>
+                </Form.Group>
             </Row>
             <Row className="mb-3">
                 <Col xs="auto">
