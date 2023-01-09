@@ -30,7 +30,7 @@ function OrderForm() {
                 </FloatingLabel>
                 </Col>
                 <Col xs="auto">
-                <Form.Label htmlFor="inlineFormInput" visuallyHidden>
+                <Form.Label htmlFor="inlineFormInput" type="number" visuallyHidden>
                     Quantity
                 </Form.Label>
                 <Form.Control
