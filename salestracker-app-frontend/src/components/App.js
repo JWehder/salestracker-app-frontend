@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState } from "react";
+import OrderForm from './OrderForm';
 
 function App() {
   const [formIsActive, setFormActive] = useState(false)
@@ -10,6 +11,10 @@ function App() {
             <h1>Sales Tracker</h1>
             <hr></hr>
       </div>
+      <div>
+        {formIsActive ? <OrderForm /> : ""}
+      </div>
+      
     </div>
   );
 }
