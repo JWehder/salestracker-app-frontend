@@ -2,8 +2,7 @@ import './App.css';
 import React, { useState } from "react";
 
 function App() {
-  const [revenue, setRevenue] = useState()
-  const [margin, setMargin] = useState()
+  const [formIsActive, setFormActive] = useState(false)
 
   return (
     <div className="App">
