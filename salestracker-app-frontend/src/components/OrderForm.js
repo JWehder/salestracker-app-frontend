@@ -38,6 +38,9 @@ function OrderForm() {
                     id="inlineFormInput"
                 />
                 </Form.Group>
+                <Form.Group as={Col}>
+                <Button variant="primary">Cancel Order -</Button>
+                </Form.Group>
             </Row>
             <Button type="submit" className="mb-2">
                     Submit Order

@@ -1,4 +1,6 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
+
 
 function InfoRow() {
 
@@ -11,6 +13,7 @@ function InfoRow() {
             <td>Quantity</td>
             <td>Price</td>
             <td>Revenue</td>
+            <td><Button variant="primary">Cancel Order -</Button></td>
             </tr>
         </>
 

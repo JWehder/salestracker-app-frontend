@@ -13,6 +13,7 @@ function InfoTable() {
             <th>Quantity</th>
             <th>Quantity Price</th>
             <th>Revenue</th>
+            <th>Cancel Order?</th>
           </tr>
         </thead>
         <tbody>
