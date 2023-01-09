@@ -4,17 +4,17 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
+import { ButtonGroup } from "react-bootstrap";
 
 function OrderForm() {
     return (
         <Form>
             <Row className="mb-3">
+                <Form.Label>Salesperson First & Last Name</Form.Label>
                 <Form.Group as={Col}>
-                <Form.Label>Salesperson First Name</Form.Label>
                 <Form.Control type="text" placeholder="First name" />
                 </Form.Group>
                 <Form.Group as= {Col}>
-                <Form.Label>Salesperson Last Name</Form.Label>
                 <Form.Control type="text" placeholder="Last name" />
                 </Form.Group>
             </Row>
@@ -30,19 +30,20 @@ function OrderForm() {
                 </FloatingLabel>
                 </Form.Group>
                 <Form.Group as={Col}>
-                <Form.Label htmlFor="inlineFormInput" type="number">
+                <Form.Label htmlFor="inlineFormInput">
                     Quantity
                 </Form.Label>
                 <Form.Control
                     className="mb-2"
                     id="inlineFormInput"
+                    type="number"
                 />
                 </Form.Group>
-                <Form.Group as={Col} xs="auto">
+                <Form.Group as= {Col}>
                 <Button className= "addButton" variant="primary">Add +</Button>
                 </Form.Group>
             </Row>
-            <Button type="submit" className="mb-2">
+            <Button variant= "success" type="submit" className="mb-2">
                     Submit Order
             </Button>
         </Form>
