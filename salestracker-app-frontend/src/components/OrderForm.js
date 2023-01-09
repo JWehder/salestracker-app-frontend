@@ -13,13 +13,13 @@ function OrderForm() {
                 <Form.Label>Salesperson First Name</Form.Label>
                 <Form.Control type="text" placeholder="First name" />
                 </Form.Group>
-                Form
+                <Form.Group as= {Col}>
                 <Form.Label>Salesperson Last Name</Form.Label>
                 <Form.Control type="text" placeholder="Last name" />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
-                <Col xs="auto">
+                <Form.Group as={Col}>
                 <Form.Label>Product</Form.Label>
                 <FloatingLabel controlId="floatingSelectGrid" label="Select a nut">
                 <Form.Select>
@@ -28,21 +28,21 @@ function OrderForm() {
                     <option value="3">Three</option>
                 </Form.Select>
                 </FloatingLabel>
-                </Col>
-                <Col xs="auto">
-                <Form.Label htmlFor="inlineFormInput" type="number" visuallyHidden>
+                </Form.Group>
+                <Form.Group as={Col}>
+                <Form.Label htmlFor="inlineFormInput" type="number">
                     Quantity
                 </Form.Label>
                 <Form.Control
                     className="mb-2"
                     id="inlineFormInput"
                 />
-                </Col>
-                <Col xs="auto">
+                </Form.Group>
+                <Form.Group as={Col}>
                 <Button type="submit" className="mb-2">
                     Submit
                 </Button>
-                </Col>
+                </Form.Group>
             </Row>
 
         
