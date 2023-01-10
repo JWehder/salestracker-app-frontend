@@ -23,26 +23,28 @@ function OrderForm() {
 
     const productsToDisplay = Array(numberOfProducts).fill().map(() => {
         return ( 
-                <Row className="mb-3">
-                    <InputGroup as= {Col} >
-                    <DropdownButton
-                    variant="primary"
-                    title="Pick a Nut"
-                    id="input-group-dropdown-1"
-                    >
-                    <Dropdown.Item>Action</Dropdown.Item>
-                    <Dropdown.Item>Another action</Dropdown.Item>
-                    <Dropdown.Item>Nut</Dropdown.Item>
-                    <Dropdown.Item>Separated link</Dropdown.Item>
-                    </DropdownButton>
-                    <Form.Control
-                    placeholder="Quantity"
-                    type="Number"
-                    />
-                    <Button onClick= {handleAddClick} variant="primary">Add +</Button>
-                    {removeButton ? <Button onClick= {handleDeleteClick} variant="danger">Remove</Button> : ""}
-                    </InputGroup>
-                </Row>
+                <div className="cart">
+                    <Row className="mb-3">
+                        <InputGroup as= {Col} >
+                        <DropdownButton
+                        variant="primary"
+                        title="Pick a Nut"
+                        id="input-group-dropdown-1"
+                        >
+                        <Dropdown.Item>Action</Dropdown.Item>
+                        <Dropdown.Item>Another action</Dropdown.Item>
+                        <Dropdown.Item>Nut</Dropdown.Item>
+                        <Dropdown.Item>Separated link</Dropdown.Item>
+                        </DropdownButton>
+                        <Form.Control
+                        placeholder="Quantity"
+                        type="Number"
+                        />
+                        <Button onClick= {handleAddClick} variant="primary">Add +</Button>
+                        {removeButton ? <Button onClick= {handleDeleteClick} variant="danger">Remove</Button> : ""}
+                        </InputGroup>
+                    </Row>
+                </div>
         )
     })
 
