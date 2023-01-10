@@ -38,7 +38,7 @@ function OrderForm() {
                     <Form.Control
                     placeholder="Quantity"
                     type="Number"
-                    aria-label="Recipient's username with two button addons"
+                    className="quantity"
                     />
                     <Button onClick= {handleAddClick} variant="primary">Add +</Button>
                     {removeButton ? <Button onClick= {handleDeleteClick} variant="danger">Remove</Button> : ""}
