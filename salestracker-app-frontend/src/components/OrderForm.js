@@ -38,7 +38,6 @@ function OrderForm() {
                     <Form.Control
                     placeholder="Quantity"
                     type="Number"
-                    className="quantity"
                     />
                     <Button onClick= {handleAddClick} variant="primary">Add +</Button>
                     {removeButton ? <Button onClick= {handleDeleteClick} variant="danger">Remove</Button> : ""}
