@@ -13,7 +13,7 @@ function InfoRow() {
             <td>Quantity</td>
             <td>Price</td>
             <td>Revenue</td>
-            <td><Button variant="danger">Cancel Order -</Button></td>
+            <td><Button size= "small" variant="danger">Cancel Order -</Button></td>
             </tr>
         </>
 

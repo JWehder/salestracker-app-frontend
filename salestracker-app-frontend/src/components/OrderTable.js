@@ -4,15 +4,18 @@ import OrderRow from "./OrderRow";
 
 function InfoTable() {
     return (
-        <Table striped bordered hover>
+        <Table striped bordered hover reponsive size="sm" >
         <thead>
           <tr>
             <th>Order Number</th>
-            <th>Salesperson</th>
+            <th>Customer</th>
+            <th>Address</th>
+            <th>State</th>
             <th>Product</th>
             <th>Quantity</th>
-            <th>Quantity Price</th>
+            <th>Price</th>
             <th>Revenue</th>
+            <th>Salesperson</th>
             <th>Cancel Order?</th>
           </tr>
         </thead>
