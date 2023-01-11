@@ -8,7 +8,7 @@ import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 
 function App() {
-  const [formIsActive, setFormActive] = useState(false)
+  const [orderFormIsActive, setFormActive] = useState(false)
 
   return (
     <div className="App">

@@ -48,7 +48,7 @@ function OrderForm() {
                 </Form.Group>
             </Row>
             <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGridState">
+                <Form.Group as={Col}>
                     <Form.Select 
                     value={select}
                     onChange={(e) => setSelect(e.target.value)}
@@ -57,7 +57,7 @@ function OrderForm() {
                     <option>...</option>
                     </Form.Select>
                 </Form.Group>
-                <Form.Group as={Col} controlId="formGridState">
+                <Form.Group as={Col}>
                     <Form.Control
                     placeholder="Quantity"
                     type="Number"
