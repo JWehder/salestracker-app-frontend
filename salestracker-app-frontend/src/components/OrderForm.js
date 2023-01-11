@@ -9,21 +9,21 @@ import { Dropdown } from "react-bootstrap";
 
 function OrderForm() {
     const [numberOfProducts, setNumberOfProducts] = useState(1)
-    const [removeButton, setRemoveButton] = useState(false)
+    const [inputBoxes, setInputBoxes] = 
 
-    function handleAddClick() {
-        setRemoveButton(!removeButton)
+    function handleAdd(e) {
         setNumberOfProducts(numberOfProducts + 1)
+        // e.currentTarget.parentNode.parentNode.parentNode.childNodes
     }
 
-    function handleDeleteClick(e) {
-        console.log(e)
+    function handleRemove(e) {
+        console.log(e.currentTarget.parentNode.parentNode.parentNode.key)
+        setNumberOfProducts(numberOfProducts - 1)
     }
 
-
-    const productsToDisplay = Array(numberOfProducts).fill().map(() => {
+    const productsToDisplay = Array(numberOfProducts).fill().map((value, i) => {
         return ( 
-                <div className="cart">
+                <div className="cart" key={i}>
                     <Row className="mb-3">
                         <InputGroup as= {Col} >
                         <DropdownButton
@@ -40,8 +40,8 @@ function OrderForm() {
                         placeholder="Quantity"
                         type="Number"
                         />
-                        <Button onClick= {handleAddClick} variant="primary">Add +</Button>
-                        {removeButton ? <Button onClick= {handleDeleteClick} variant="danger">Remove</Button> : ""}
+                        <Button onClick= {handleAdd} variant="primary">Add +</Button>
+                        {numberOfProducts === 1 ? <Button variant="danger" disabled >Remove</Button> : <Button onClick= {handleRemove} variant="danger" >Remove</Button>}
                         </InputGroup>
                     </Row>
                 </div>
@@ -51,13 +51,12 @@ function OrderForm() {
     return (
         <Form>
             <Row className="mb-3">
-                <Form.Label>Salesperson First & Last Name</Form.Label>
-                <Form.Group as={Col}>
-                <Form.Control type="text" placeholder="First name" />
-                </Form.Group>
-
-                <Form.Group as= {Col}>
-                <Form.Control type="text" placeholder="Last name" />
+                <Form.Group as={Col} controlId="formGridState">
+                <Form.Label>Salesperson</Form.Label>
+                <Form.Select defaultValue="Choose...">
+                    <option>Choose...</option>
+                    <option>...</option>
+                </Form.Select>
                 </Form.Group>
             </Row>
                 <Form.Group className="mb-3" controlId="formGridAddress1">
@@ -88,8 +87,10 @@ function OrderForm() {
                 <Form.Control />
                 </Form.Group>
             </Row>
-                
+            <Row className="mb-3">
                 {productsToDisplay}
+            </Row>
+
             <Button variant= "success" type="submit" className="mb-2">
                     Submit Order
             </Button>
