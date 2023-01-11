@@ -9,6 +9,12 @@ import { Col } from "react-bootstrap";
 
 function App() {
   const [orderFormIsActive, setFormActive] = useState(false)
+  const [customerFormIsActive, setCustomerFormActive] = useState(false)
+
+  function handleCustomerFormClick() {
+    setFormActive(!orderFormIsActive)
+    setCustomerFormActive(!customerFormIsActive)
+  }
 
   return (
     <div className="App">
@@ -16,10 +22,13 @@ function App() {
             <h1>Nut Sales Tracker</h1>
             <hr></hr>
       </div>
-      <Button onClick={() => setFormActive(!formIsActive)} variant="primary">{formIsActive ? <CloseButton /> : "Create Order +"}</Button>
+      <div>
+      <Button onClick={handleCustomerFormClick} variant="primary">{customerFormIsActive ? <CloseButton /> : "Create Order +"}</Button>
+      <Button onClick={() => setFormActive(!orderFormIsActive)}variant="primary">{orderFormIsActive ? <CloseButton /> : "Create Order +"}</Button>
+      </div>
       <div>
         
-        {formIsActive ? <><hr></hr> <OrderForm /></> : ""}
+        {orderFormIsActive ? <><hr></hr> <OrderForm /></> : ""}
         <hr></hr>
       </div>
       <div>
