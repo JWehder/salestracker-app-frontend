@@ -22,10 +22,8 @@ function App() {
             <h1>Nut Sales Tracker</h1>
             <hr></hr>
       </div>
-      <div>
       <Button onClick={handleCustomerFormClick} variant="primary">{customerFormIsActive ? <CloseButton /> : "Create Order +"}</Button>
       <Button onClick={() => setFormActive(!orderFormIsActive)}variant="primary">{orderFormIsActive ? <CloseButton /> : "Create Order +"}</Button>
-      </div>
       <div>
         
         {orderFormIsActive ? <><hr></hr> <OrderForm /></> : ""}
