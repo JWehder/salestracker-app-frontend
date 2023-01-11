@@ -3,50 +3,10 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import { InputGroup } from "react-bootstrap";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { Dropdown } from "react-bootstrap";
 
 function OrderForm() {
-    const [numberOfProducts, setNumberOfProducts] = useState(1)
-    const [inputBoxes, setInputBoxes] = 
-
-    function handleAdd(e) {
-        setNumberOfProducts(numberOfProducts + 1)
-        // e.currentTarget.parentNode.parentNode.parentNode.childNodes
-    }
-
-    function handleRemove(e) {
-        console.log(e.currentTarget.parentNode.parentNode.parentNode.key)
-        setNumberOfProducts(numberOfProducts - 1)
-    }
-
-    const productsToDisplay = Array(numberOfProducts).fill().map((value, i) => {
-        return ( 
-                <div className="cart" key={i}>
-                    <Row className="mb-3">
-                        <InputGroup as= {Col} >
-                        <DropdownButton
-                        variant="primary"
-                        title="Pick a Nut"
-                        id="input-group-dropdown-1"
-                        >
-                        <Dropdown.Item>Action</Dropdown.Item>
-                        <Dropdown.Item>Another action</Dropdown.Item>
-                        <Dropdown.Item>Nut</Dropdown.Item>
-                        <Dropdown.Item>Separated link</Dropdown.Item>
-                        </DropdownButton>
-                        <Form.Control
-                        placeholder="Quantity"
-                        type="Number"
-                        />
-                        <Button onClick= {handleAdd} variant="primary">Add +</Button>
-                        {numberOfProducts === 1 ? <Button variant="danger" disabled >Remove</Button> : <Button onClick= {handleRemove} variant="danger" >Remove</Button>}
-                        </InputGroup>
-                    </Row>
-                </div>
-        )
-    })
+    const [quantity, setQuantity] = useState(0)
+    const [select, setSelect] = useState("...")
 
     return (
         <Form>
@@ -88,8 +48,26 @@ function OrderForm() {
                 </Form.Group>
             </Row>
             <Row className="mb-3">
-                {productsToDisplay}
-            </Row>
+                <Form.Group as={Col} controlId="formGridState">
+                    <Form.Select 
+                    value={select}
+                    onChange={(e) => setSelect(e.target.value)}
+                    >
+                    <option>Choose...</option>
+                    <option>...</option>
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridState">
+                    <Form.Control
+                    placeholder="Quantity"
+                    type="Number"
+                    value={quantity}
+                    name="quantity"
+                    onChange={(e) => setQuantity(e.target.value)}
+                    />
+                </Form.Group>
+                
+        </Row>
 
             <Button variant= "success" type="submit" className="mb-2">
                     Submit Order
