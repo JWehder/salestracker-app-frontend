@@ -7,16 +7,11 @@ function InfoTable() {
         <Table className="table" striped bordered hover reponsive size="sm" >
         <thead>
           <tr>
-            <th>Order #</th>
-            <th>Customer</th>
-            <th>Address</th>
-            <th>State</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Revenue</th>
+            <th>Customer #</th>
             <th>Salesperson</th>
-            <th>Cancel Order?</th>
+            <th>Customer Name</th>
+            <th>Units Sold</th>
+            <th>Revenue</th>
           </tr>
         </thead>
         <tbody>
