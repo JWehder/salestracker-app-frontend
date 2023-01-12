@@ -8,25 +8,21 @@ import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 
 function App() {
-  const [orderFormIsActive, setFormActive] = useState(false)
-  const [customerFormIsActive, setCustomerFormActive] = useState(false)
-
-  function handleCustomerFormClick() {
-    setFormActive(!orderFormIsActive)
-    setCustomerFormActive(!customerFormIsActive)
-  }
+  const [formIsActive, setFormActive] = useState(false)
 
   return (
     <div className="App">
       <div className="webpageHeader">
-            <h1>Nut Sales Tracker</h1>
+            <h1>Sales Alignments</h1>
             <hr></hr>
       </div>
-      <Button onClick={handleCustomerFormClick} variant="primary">{customerFormIsActive ? <CloseButton /> : "Create Order +"}</Button>
-      <Button onClick={() => setFormActive(!orderFormIsActive)}variant="primary">{orderFormIsActive ? <CloseButton /> : "Create Order +"}</Button>
+      <div className="top-buttons">
+        <Button onClick={() => setFormActive(!formIsActive)} variant="primary">{formIsActive ? <CloseButton /> : "Customer +"}</Button>
+        
+      </div>
       <div>
         
-        {orderFormIsActive ? <><hr></hr> <OrderForm /></> : ""}
+        {formIsActive ? <><hr></hr> <OrderForm /></> : ""}
         <hr></hr>
       </div>
       <div>
