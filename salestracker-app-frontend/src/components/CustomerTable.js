@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import OrderRow from "./CustomerRow";
 
 function CustomerTable() {
-  const [customers, setCustomers] = useState([])
+  const [salespeople, setSalespeople] = useState([])
+  const []
 
   useEffect(() => {
-    fetch()
+    fetch('http://localhost:9292/salespeople')
+      .then((resp) => resp.json())
+      .then((data) => setSalespeople(data))
+  }, [])
+
+  useEffect(() => {
+    
+  })
+
+  const displayCustomers = salespeople.map((salesperson) => {
+    
   })
 
     return (
