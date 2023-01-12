@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import OrderForm from './OrderForm';
+import OrderForm from './CustomerForm';
 import Button from 'react-bootstrap/Button';
-import OrderTable from './OrderTable';
+import CustomerTable from './CustomerTable';
 import CloseButton from 'react-bootstrap/CloseButton';
 import InfoCard from "./InfoCard";
 import { Row } from "react-bootstrap";
@@ -40,7 +40,7 @@ function App() {
         <hr></hr>
       </div>
       <div>
-        <OrderTable />
+        <CustomerTable />
       </div>
     </div>
   );

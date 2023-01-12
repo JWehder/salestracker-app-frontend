@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-function OrderForm() {
+function CustomerForm() {
     const [quantity, setQuantity] = useState(0)
     const [select, setSelect] = useState("...")
 
@@ -58,4 +58,4 @@ function OrderForm() {
   );
 }
 
-export default OrderForm;
+export default CustomerForm;

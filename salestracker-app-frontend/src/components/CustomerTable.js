@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from 'react-bootstrap/Table';
-import OrderRow from "./OrderRow";
+import OrderRow from "./CustomerRow";
 
-function InfoTable() {
+function CustomerTable() {
+  const [customers, setCustomers] = useState([])
+
+  useEffect(() => {
+    fetch()
+  })
+
     return (
         <Table className="table" striped bordered hover reponsive size="sm" >
         <thead>
@@ -22,4 +28,4 @@ function InfoTable() {
     )
 }
 
-export default InfoTable;
+export default CustomerTable;
