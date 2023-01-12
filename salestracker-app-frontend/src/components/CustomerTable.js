@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
-import OrderRow from "./CustomerRow";
+import CustomerRow from "./CustomerRow";
 
 function CustomerTable() {
-  const [salespeople, setSalespeople] = useState([])
-  const []
+  const [customers, setCustomers] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:9292/salespeople')
+    fetch('http://localhost:9292/customers')
       .then((resp) => resp.json())
-      .then((data) => setSalespeople(data))
+      .then((allCustomers) => setCustomers(allCustomers))
   }, [])
 
-  useEffect(() => {
-    
-  })
-
-  const displayCustomers = salespeople.map((salesperson) => {
-    
+  const displayCustomers = customers.map((customer) => {
+    return <CustomerRow customer= {customer} key={customer.customer_first_name}/>
   })
 
     return (
@@ -32,7 +27,7 @@ function CustomerTable() {
           </tr>
         </thead>
         <tbody>
-          <OrderRow />
+          {displayCustomers}
         </tbody>
         </Table>
 
