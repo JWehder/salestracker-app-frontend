@@ -1,14 +1,28 @@
 import React, { useState } from "react";
-import OrderForm from './CustomerForm';
 import Button from 'react-bootstrap/Button';
 import CustomerTable from './CustomerTable';
 import CloseButton from 'react-bootstrap/CloseButton';
 import InfoCard from "./InfoCard";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import CustomerForm from "./CustomerForm";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
 
 function App() {
-  const [formIsActive, setFormActive] = useState(false)
+  const [changeButton, setChangeButton] = useState(false)
+  const [displayedForm, setDisplayedForm] = useState("Make Changes")
+
+  function handleChangeButtonClick(e) {
+    setDisplayedForm(e.target.value)
+    setChangeButton(!changeButton)
+  }
+
+  function handleCloseButtonClick() {
+    setChangeButton(!changeButton)
+    setDisplayedForm("Make Changes")
+  } 
 
   return (
     <div className="App">
@@ -16,13 +30,23 @@ function App() {
             <h1>Sales Alignments</h1>
             <hr></hr>
       </div>
-      <div className="top-buttons">
-        <Button onClick={() => setFormActive(!formIsActive)} variant="primary">{formIsActive ? <CloseButton /> : "Customer +"}</Button>
-        
+      <div>
+
+        {
+          changeButton ?
+          <CloseButton onClick={handleCloseButtonClick}/>
+          :
+          <DropdownButton id="dropdown-item-button" title="Make Changes">
+            <Dropdown.ItemText>Make Changes to the Database</Dropdown.ItemText>
+            <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Create Customer"}>Create customer</Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Edit Customer"}>Edit Customer</Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Delete Customer"}>Delete Customer</Dropdown.Item>
+          </DropdownButton>
+          }
+          
       </div>
       <div>
-        
-        {formIsActive ? <><hr></hr> <OrderForm /></> : ""}
+        {displayedForm === "Create Customer" ? <><hr></hr> <CustomerForm /></> : ""}
         <hr></hr>
       </div>
       <div>

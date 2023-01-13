@@ -5,8 +5,9 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
 function CustomerForm() {
-    const [quantity, setQuantity] = useState(0)
+    const [revenue, setRevenue] = useState(0)
     const [salespeople, setSalespeople] = useState([])
+    const [unitsSold, setUnitsSold] = useState(0)
 
     useEffect(() => {
         fetch('http://localhost:9292/salespeople')
@@ -41,27 +42,29 @@ function CustomerForm() {
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col}>
-                    <Form.Select 
-                        defaultValue="..."
-                    >
-                    <option>Choose...</option>
-                    <option>...</option>
-                    </Form.Select>
+                    <Form.Control
+                    placeholder="Units Sold"
+                    type="Number"
+                    value={unitsSold}
+                    name="units_sold"
+                    onChange={(e) => setUnitsSold(e.target.value)}
+                    />
                 </Form.Group>
+
                 <Form.Group as={Col}>
                     <Form.Control
-                    placeholder="Quantity"
+                    placeholder="Revenue"
                     type="Number"
-                    value={quantity}
-                    name="quantity"
-                    onChange={(e) => setQuantity(e.target.value)}
+                    value={revenue}
+                    name="revenue"
+                    onChange={(e) => setRevenue(e.target.value)}
                     />
                 </Form.Group>
                 
         </Row>
 
-            <Button variant= "success" type="submit" className="mb-2">
-                    Submit Order
+            <Button variant= "primary" type="submit" className="mb-2">
+                    Submit Customer
             </Button>
         </Form>
   );
