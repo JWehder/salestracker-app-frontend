@@ -9,7 +9,7 @@ import { SalesContext } from "../context/salesContext";
 function EditForm() {
     const [displayForm, setDisplayForm] = useState(false)
     const { salespeople } = useContext(SalesContext)
-    const { customer, handleInputChange } = useContext(CustomerContext)
+    const { getCustomer, customer, handleInputChange } = useContext(CustomerContext)
 
     const salespeopleOptions = salespeople.map((salesperson) => {
         return <option>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</option>
@@ -21,9 +21,9 @@ function EditForm() {
                 <Form>
                     <Form.Label>Please enter Customer Number#</Form.Label>
                         <Form.Group className="mb-3">
-                        <Form.Control value= {customer.id} placeholder="First Name" />
+                        <Form.Control name={'id'} value= {customer.id} onChange= {handleInputChange} placeholder="First Name" />
                     </Form.Group>
-                    <Button variant= "primary" type="submit" className="mb-2">
+                    <Button variant= "primary" type="submit" className="mb-2" onSubmit={getCustomer}>
                         Submit Customer
                     </Button>
                 </Form>

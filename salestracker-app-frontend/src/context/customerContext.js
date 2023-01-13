@@ -19,12 +19,25 @@ function CustomerProvider( { children }) {
         })
     }
 
+    function getCustomer(id) {
+            fetch(`http://localhost:9292/customers/:${id}`)
+                .then((resp) => resp.json())
+                .then((customer) => setCustomer({
+                    ...customer,
+                    salesperson_id: customer.id,
+                    customer_first_name: customer.customer_first_name,
+                    customer_last_name: customer.customer_last_name,
+                    units_sold: customer.units_sold,
+                    revenue: customer.revenue
+                }))
+    }
+
     useEffect(() => {
       fetch('http://localhost:9292/customers')
         .then((resp) => resp.json())
         .then((allCustomers) => setCustomers(allCustomers))
     }, [])
-    return <CustomerContext.Provider value={{ customers, handleInputChange, customer }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ customers, handleInputChange, customer, getCustomer }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }
