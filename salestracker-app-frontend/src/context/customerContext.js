@@ -24,7 +24,7 @@ function CustomerProvider( { children }) {
         .then((resp) => resp.json())
         .then((allCustomers) => setCustomers(allCustomers))
     }, [])
-    return <CustomerContext.Provider value={{ customers, handleInputChange }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ customers, handleInputChange, customer }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }

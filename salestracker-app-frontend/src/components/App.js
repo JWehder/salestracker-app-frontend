@@ -9,6 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { CustomerProvider } from "../context/customerContext"
 import { SalesProvider } from "../context/salesContext";
+import EditForm from "./EditForm";
 
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
           :
           <DropdownButton id="dropdown-item-button" title="Make Changes">
             <Dropdown.ItemText>Make Changes to the Database</Dropdown.ItemText>
-            <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Create Customer"}>Create customer</Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Create Customer"}>Create Customer</Dropdown.Item>
             <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Edit Customer"}>Edit Customer</Dropdown.Item>
             <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Delete Customer"}>Delete Customer</Dropdown.Item>
           </DropdownButton>
@@ -50,6 +51,7 @@ function App() {
       </div>
       <div>
         {displayedForm === "Create Customer" ? <><hr></hr> <CustomerForm /></> : ""}
+        {displayedForm === "Edit Customer" ? <><hr></hr> <EditForm /></> : ""}
         <hr></hr>
       </div>
       <div>
