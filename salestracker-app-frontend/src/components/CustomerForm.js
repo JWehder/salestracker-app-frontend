@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import { CustomerContext } from "../context/customerContext";
 
 function CustomerForm() {
     const [revenue, setRevenue] = useState(0)
-    const [salespeople, setSalespeople] = useState([])
     const [unitsSold, setUnitsSold] = useState(0)
 
-    useEffect(() => {
-        fetch('http://localhost:9292/salespeople')
-            .then((resp) => resp.json())
-            .then((salespeople) => setSalespeople(salespeople))
-    }, [])
+
+    const { salespeople } = useContext(CustomerContext)
+
 
     const salespeopleOptions = salespeople.map((salesperson) => {
         return <option>{salesperson.first_name} {salesperson.last_name}</option>

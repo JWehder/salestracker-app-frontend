@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Table from 'react-bootstrap/Table';
 import CustomerRow from "./CustomerRow";
+import { CustomerContext } from "../context/customerContext";
 
 function CustomerTable() {
-  const [customers, setCustomers] = useState([])
-
-  useEffect(() => {
-    fetch('http://localhost:9292/customers')
-      .then((resp) => resp.json())
-      .then((allCustomers) => setCustomers(allCustomers))
-  }, [])
+  const { customers } = useContext(CustomerContext)
 
   const displayCustomers = customers.map((customer) => {
     return <CustomerRow customer= {customer} key={customer.customer_first_name}/>

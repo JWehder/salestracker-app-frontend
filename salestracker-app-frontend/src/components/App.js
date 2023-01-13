@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from 'react-bootstrap/Button';
 import CustomerTable from './CustomerTable';
 import CloseButton from 'react-bootstrap/CloseButton';
 import InfoCard from "./InfoCard";
@@ -8,6 +7,7 @@ import { Col } from "react-bootstrap";
 import CustomerForm from "./CustomerForm";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { CustomerProvider } from "../context/customerContext"
 
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
   } 
 
   return (
+    <CustomerProvider>
     <div className="App">
       <div className="webpageHeader">
             <h1>Sales Alignments</h1>
@@ -67,6 +68,7 @@ function App() {
         <CustomerTable />
       </div>
     </div>
+    </CustomerProvider>
   );
 }
 
