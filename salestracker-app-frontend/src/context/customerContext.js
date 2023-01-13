@@ -5,6 +5,13 @@ const CustomerContext = createContext();
 function CustomerProvider( { children }) {
     const [salespeople, setSalespeople] = useState([])
     const [customers, setCustomers] = useState([])
+    const [customer, setCustomer] = useState({
+        salesperson_id: 0,
+        customer_first_name: "First Name",
+        customer_last_name: "Last Name",
+        units_sold: 0,
+        revenue: 0
+    })
 
     useEffect(() => {
       fetch('http://localhost:9292/customers')

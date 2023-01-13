@@ -5,15 +5,14 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { CustomerContext } from "../context/customerContext";
 
-function CustomerForm() {
-
-
-
+function EditForm() {
+    const [revenue, setRevenue] = useState(0)
+    const [unitsSold, setUnitsSold] = useState(0)
 
     const { salespeople } = useContext(CustomerContext)
 
     const salespeopleOptions = salespeople.map((salesperson) => {
-        return <option>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</option>
+        return <option>{salesperson.first_name} {salesperson.last_name}</option>
     })
 
     return (
@@ -67,4 +66,4 @@ function CustomerForm() {
   );
 }
 
-export default CustomerForm;
+export default EditForm;
