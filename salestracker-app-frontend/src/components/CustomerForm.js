@@ -1,16 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import { SalesContext } from "../context/salesContext";
 import { CustomerContext } from "../context/customerContext";
 
 function CustomerForm() {
-
-
-
-
-    const { salespeople } = useContext(CustomerContext)
+    const { salespeople } = useContext(SalesContext)
+    const { customer, handleInputChange } = useContext(CustomerContext)
 
     const salespeopleOptions = salespeople.map((salesperson) => {
         return <option>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</option>
@@ -42,9 +40,9 @@ function CustomerForm() {
                     <Form.Control
                     placeholder="Units Sold"
                     type="Number"
-                    value={unitsSold}
+                    value={customer.units_sold}
                     name="units_sold"
-                    onChange={(e) => setUnitsSold(e.target.value)}
+                    onChange={handleInputChange}
                     />
                 </Form.Group>
 
@@ -52,9 +50,9 @@ function CustomerForm() {
                     <Form.Control
                     placeholder="Revenue"
                     type="Number"
-                    value={revenue}
+                    value={customer.revenue}
                     name="revenue"
-                    onChange={(e) => setRevenue(e.target.value)}
+                    onChange={handleInputChange}
                     />
                 </Form.Group>
                 

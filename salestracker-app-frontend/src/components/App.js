@@ -8,6 +8,7 @@ import CustomerForm from "./CustomerForm";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { CustomerProvider } from "../context/customerContext"
+import { SalesProvider } from "../context/salesContext";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <CustomerProvider>
+    <SalesProvider>
     <div className="App">
       <div className="webpageHeader">
             <h1>Sales Alignments</h1>
@@ -68,6 +70,7 @@ function App() {
         <CustomerTable />
       </div>
     </div>
+    </SalesProvider>
     </CustomerProvider>
   );
 }
