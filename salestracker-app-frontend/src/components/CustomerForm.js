@@ -7,12 +7,8 @@ import { SalesContext } from "../context/salesContext";
 import { CustomerContext } from "../context/customerContext";
 
 function CustomerForm() {
-    const { salespeople } = useContext(SalesContext)
+    const { salespeopleOptions } = useContext(SalesContext)
     const { customer, handleInputChange } = useContext(CustomerContext)
-
-    const salespeopleOptions = salespeople.map((salesperson) => {
-        return <option>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</option>
-    })
 
     return (
         <Form>

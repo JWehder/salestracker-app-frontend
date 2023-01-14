@@ -11,7 +11,11 @@ function SalesProvider( { children }) {
             .then((salespeople) => setSalespeople(salespeople))
     }, [])
 
-    return <SalesContext.Provider value={{ salespeople }}>{children}</SalesContext.Provider>
+    const salespeopleOptions = salespeople.map((salesperson) => {
+        return <option>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</option>
+    })
+
+    return <SalesContext.Provider value={{ salespeople, salespeopleOptions }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }
