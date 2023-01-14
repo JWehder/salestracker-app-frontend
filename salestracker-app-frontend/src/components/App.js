@@ -52,6 +52,7 @@ function App() {
       <div>
         {displayedForm === "Create Customer" ? <><hr></hr> <CustomerForm /></> : ""}
         {displayedForm === "Edit Customer" ? <><hr></hr> <EditForm /></> : ""}
+        {displayedForm === "Del Customer" ? <><hr></hr> <EditForm /></> : ""}
         <hr></hr>
       </div>
       <div>
