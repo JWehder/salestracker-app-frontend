@@ -21,9 +21,14 @@ function CustomerProvider( { children }) {
         })
     }
 
-    function deleteCustomer() {
+    function deleteCustomer(e) {
         e.preventDefault()
-        console.log(customer.id)
+        fetch(`http://localhost:9292/customers/${customer.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     }
 
     function getCustomer(e) {
@@ -47,7 +52,7 @@ function CustomerProvider( { children }) {
         .then((allCustomers) => setCustomers(allCustomers))
     }, [])
 
-    return <CustomerContext.Provider value={{ displayForm, customers, handleInputChange, customer, getCustomer }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }

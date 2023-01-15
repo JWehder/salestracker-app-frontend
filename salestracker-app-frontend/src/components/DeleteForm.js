@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { CustomerContext } from "../context/customerContext";
 
 function DeleteForm() {
-    const { handleInputChange, customer } = useContext(CustomerContext)
+    const { deleteCustomer, handleInputChange, customer } = useContext(CustomerContext)
 
     return (
         <div>

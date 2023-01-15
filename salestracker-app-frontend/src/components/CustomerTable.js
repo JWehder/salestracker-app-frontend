@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import Table from 'react-bootstrap/Table';
 import CustomerRow from "./CustomerRow";
 import { CustomerContext } from "../context/customerContext";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function CustomerTable() {
   const { customers } = useContext(CustomerContext)
@@ -11,6 +13,14 @@ function CustomerTable() {
   })
 
     return (
+        <>
+        <DropdownButton id="dropdown-item-button" title="Select Salesperson">
+          <Dropdown.ItemText>Make Changes to the Database</Dropdown.ItemText>
+          <Dropdown.Item as="button" value={"Create Customer"}>Create Customer</Dropdown.Item>
+          <Dropdown.Item as="button" value={"Edit Customer"}>Edit Customer</Dropdown.Item>
+          <Dropdown.Item as="button" value={"Delete Customer"}>Delete Customer</Dropdown.Item>
+        </DropdownButton>
+        <hr></hr>
         <Table className="table" striped bordered hover reponsive size="sm" >
         <thead>
           <tr>
@@ -25,7 +35,7 @@ function CustomerTable() {
           {displayCustomers}
         </tbody>
         </Table>
-
+      </>
     )
 }
 
