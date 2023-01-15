@@ -1,16 +1,13 @@
 import React, { useContext } from "react";
 import Table from 'react-bootstrap/Table';
-import CustomerRow from "./CustomerRow";
 import { CustomerContext } from "../context/customerContext";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function CustomerTable() {
-  const { customers } = useContext(CustomerContext)
+  const { displayCustomers } = useContext(CustomerContext)
 
-  const displayCustomers = customers.map((customer) => {
-    return <CustomerRow customer= {customer} key={customer.customer_first_name}/>
-  })
+
 
     return (
         <>

@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import CustomerRow from '../components/CustomerRow';
 
 const CustomerContext = createContext();
 
@@ -52,7 +53,11 @@ function CustomerProvider( { children }) {
         .then((allCustomers) => setCustomers(allCustomers))
     }, [])
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer }}>{children}</CustomerContext.Provider>
+    const displayCustomers = customers.map((customer) => {
+        return <CustomerRow customer= {customer} key={customer.customer_first_name}/>
+    })
+
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }
