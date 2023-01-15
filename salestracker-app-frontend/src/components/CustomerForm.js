@@ -26,13 +26,20 @@ function CustomerForm() {
                 <Form.Group as={Col} className="mb-3" controlId="formGridAddress1">
                 <Form.Control 
                 placeholder="First Name" 
-                type=
+                type= "text"
+                value={customer.customer_first_name}
+                name= "customer_first_name"
+                onChange= {handleInputChange}
                 />
                 </Form.Group>
 
                 <Form.Group as={Col} className="mb-3" controlId="formGridAddress2">
                 <Form.Control 
                 placeholder="Last Name" 
+                type= "text"
+                value={customer.customer_last_name}
+                name= "customer_last_name"
+                onChange= {handleInputChange}
                 />
                 </Form.Group>
             </Row>
