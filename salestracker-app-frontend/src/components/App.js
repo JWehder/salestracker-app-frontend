@@ -10,6 +10,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { CustomerProvider } from "../context/customerContext"
 import { SalesProvider } from "../context/salesContext";
 import EditForm from "./EditForm";
+import DeleteForm from "./DeleteForm"
 
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
       <div>
         {displayedForm === "Create Customer" ? <><hr></hr> <CustomerForm /></> : ""}
         {displayedForm === "Edit Customer" ? <><hr></hr> <EditForm /></> : ""}
-        {displayedForm === "Del Customer" ? <><hr></hr> <EditForm /></> : ""}
+        {displayedForm === "Delete Customer" ? <><hr></hr> <DeleteForm /></> : ""}
         <hr></hr>
       </div>
       <div>

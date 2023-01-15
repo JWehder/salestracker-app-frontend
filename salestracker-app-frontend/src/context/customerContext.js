@@ -21,9 +21,14 @@ function CustomerProvider( { children }) {
         })
     }
 
+    function deleteCustomer() {
+        e.preventDefault()
+        console.log(customer.id)
+    }
+
     function getCustomer(e) {
         e.preventDefault()
-        fetch(`http://localhost:9292/customers/:${customer.id}`)
+        fetch(`http://localhost:9292/customers/${customer.id}`)
             .then((resp) => resp.json())
             .then((customer) => setCustomer({
                 ...customer,
@@ -41,6 +46,7 @@ function CustomerProvider( { children }) {
         .then((resp) => resp.json())
         .then((allCustomers) => setCustomers(allCustomers))
     }, [])
+
     return <CustomerContext.Provider value={{ displayForm, customers, handleInputChange, customer, getCustomer }}>{children}</CustomerContext.Provider>
 }
 
