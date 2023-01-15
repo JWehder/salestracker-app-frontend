@@ -12,7 +12,8 @@ function CustomerProvider( { children }) {
         customer_first_name: "First Name",
         customer_last_name: "Last Name",
         units_sold: 0,
-        revenue: 0
+        revenue: 0,
+        salesperson: {}
     })
 
     function handleInputChange(e) {
@@ -42,7 +43,8 @@ function CustomerProvider( { children }) {
                 customer_first_name: customer.customer_first_name,
                 customer_last_name: customer.customer_last_name,
                 units_sold: customer.units_sold,
-                revenue: customer.revenue
+                revenue: customer.revenue,
+                salesperson: customer.salesperson
             }))
         setDisplayForm(!displayForm)
     }

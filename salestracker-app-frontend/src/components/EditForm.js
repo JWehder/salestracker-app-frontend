@@ -29,7 +29,7 @@ function EditForm() {
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>Salesperson</Form.Label>
-                    <Form.Select defaultValue="Choose...">
+                    <Form.Select defaultValue={`${customer.salesperson_id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}>
                         <option>Choose...</option>
                         {salespeopleOptions}
                     </Form.Select>
@@ -48,11 +48,18 @@ function EditForm() {
                     </Form.Group>
 
                     <Form.Group as={Col} className="mb-3" controlId="formGridAddress2">
-                    <Form.Control placeholder="Last Name" />
+                    <Form.Control 
+                    placeholder="Last Name" 
+                    type="text"
+                    value={customer.customer_last_name}
+                    name="customer_last_name"
+                    onChange={handleInputChange}
+                    />
                     </Form.Group>
                 </Row>
                 <Row className="mb-3">
                     <Form.Group as={Col}>
+                    <Form.Label>Units Sold</Form.Label>
                         <Form.Control
                         placeholder="Units Sold"
                         type="Number"
@@ -62,7 +69,9 @@ function EditForm() {
                         />
                     </Form.Group>
 
+                    
                     <Form.Group as={Col}>
+                    <Form.Label>Revenue</Form.Label>
                         <Form.Control
                         placeholder="Revenue"
                         type="Number"
