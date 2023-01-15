@@ -43,6 +43,7 @@ function App() {
           :
           <DropdownButton id="dropdown-item-button" title="Make Changes">
             <Dropdown.ItemText>Make Changes to the Database</Dropdown.ItemText>
+            <Dropdown.Divider></Dropdown.Divider>
             <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Create Customer"}>Create Customer</Dropdown.Item>
             <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Edit Customer"}>Edit Customer</Dropdown.Item>
             <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Delete Customer"}>Delete Customer</Dropdown.Item>

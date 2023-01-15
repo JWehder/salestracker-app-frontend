@@ -3,19 +3,18 @@ import Table from 'react-bootstrap/Table';
 import { CustomerContext } from "../context/customerContext";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { SalesContext } from "../context/salesContext";
 
 function CustomerTable() {
   const { displayCustomers } = useContext(CustomerContext)
-
-
+  const { salespeopleDropdownItems } = useContext(SalesContext)
 
     return (
         <>
         <DropdownButton id="dropdown-item-button" title="Select Salesperson">
-          <Dropdown.ItemText>Make Changes to the Database</Dropdown.ItemText>
-          <Dropdown.Item as="button" value={"Create Customer"}>Create Customer</Dropdown.Item>
-          <Dropdown.Item as="button" value={"Edit Customer"}>Edit Customer</Dropdown.Item>
-          <Dropdown.Item as="button" value={"Delete Customer"}>Delete Customer</Dropdown.Item>
+          <Dropdown.ItemText>Display a Saleperson's Customers</Dropdown.ItemText>
+          <Dropdown.Divider></Dropdown.Divider>
+          {salespeopleDropdownItems}
         </DropdownButton>
         <hr></hr>
         <Table className="table" striped bordered hover reponsive size="sm" >
