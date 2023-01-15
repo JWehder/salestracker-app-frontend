@@ -24,11 +24,16 @@ function CustomerForm() {
             <Row className="mb-3">
                 <Form.Label>Customer First & Last Name</Form.Label>
                 <Form.Group as={Col} className="mb-3" controlId="formGridAddress1">
-                <Form.Control placeholder="First Name" />
+                <Form.Control 
+                placeholder="First Name" 
+                type=
+                />
                 </Form.Group>
 
                 <Form.Group as={Col} className="mb-3" controlId="formGridAddress2">
-                <Form.Control placeholder="Last Name" />
+                <Form.Control 
+                placeholder="Last Name" 
+                />
                 </Form.Group>
             </Row>
             <Row className="mb-3">
