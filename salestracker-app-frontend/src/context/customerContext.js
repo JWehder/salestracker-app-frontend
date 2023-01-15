@@ -38,7 +38,7 @@ function CustomerProvider( { children }) {
             .then((resp) => resp.json())
             .then((customer) => setCustomer({
                 ...customer,
-                salesperson_id: customer.id,
+                salesperson_id: customer.salesperson_id,
                 customer_first_name: customer.customer_first_name,
                 customer_last_name: customer.customer_last_name,
                 units_sold: customer.units_sold,
@@ -54,10 +54,10 @@ function CustomerProvider( { children }) {
     }, [])
 
     const displayCustomers = customers.map((customer) => {
-        return <CustomerRow customer= {customer} key={customer.customer_first_name}/>
+        return <CustomerRow customer= {customer} key={customer.id}/>
     })
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }

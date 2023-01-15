@@ -13,12 +13,12 @@ function EditForm() {
     return (
         <div>
             <div>
-                <Form>
+                <Form onSubmit={getCustomer}>
                     <Form.Label>Please enter Customer Number#</Form.Label>
                         <Form.Group className="mb-3">
                         <Form.Control name={'id'} value= {customer.id} onChange= {handleInputChange} placeholder="1234" />
                     </Form.Group>
-                    <Button variant= "primary" type="submit" className="mb-2" onSubmit={getCustomer}>
+                    <Button variant= "primary" type="submit" className="mb-2">
                         Submit
                     </Button>
                 </Form>
@@ -38,7 +38,13 @@ function EditForm() {
                 <Row className="mb-3">
                     <Form.Label>Customer First & Last Name</Form.Label>
                     <Form.Group as={Col} className="mb-3" controlId="formGridAddress1">
-                    <Form.Control placeholder="First Name" />
+                    <Form.Control 
+                    placeholder="First Name" 
+                    type="text"
+                    value={customer.customer_first_name}
+                    name="customer_first_name"
+                    onChange={handleInputChange}
+                    />
                     </Form.Group>
 
                     <Form.Group as={Col} className="mb-3" controlId="formGridAddress2">
