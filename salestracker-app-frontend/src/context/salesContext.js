@@ -5,13 +5,14 @@ import { CustomerContext } from './customerContext';
 const SalesContext = createContext();
 
 function SalesProvider( { children }) {
-    const { setCustomers, setCustomer, customer } = useContext(CustomerContext)
+    const { setCustomers } = useContext(CustomerContext)
 
     const [salespeople, setSalespeople] = useState([])
     const [currentSalesperson, setCurrentSalesperson] = useState({
         first_name: "",
         last_name: "",
-        quota: null
+        quota: null,
+        customers: []
     })
 
     useEffect(() => {
@@ -29,11 +30,6 @@ function SalesProvider( { children }) {
     function setData(salesperson) {
         setCustomers(salesperson.customers)
         setCurrentSalesperson(salesperson)
-        setCustomer({
-            ...customer,
-            salesperson: {...salesperson}
-        })
-        console.log(salesperson)
     }
 
     function handleInputChange(e) {

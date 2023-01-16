@@ -7,8 +7,8 @@ import { SalesContext } from "../context/salesContext";
 import { CustomerContext } from "../context/customerContext";
 
 function CustomerForm() {
-    const { salespeopleOptions, getSalesperson } = useContext(SalesContext)
-    const { customer, handleInputChange, createCustomer } = useContext(CustomerContext)
+    const { salespeopleOptions } = useContext(SalesContext)
+    const { customer, handleInputChange, createCustomer, getSalespersonForCustomer } = useContext(CustomerContext)
 
     return (
         <Form onSubmit={createCustomer}>
@@ -19,7 +19,7 @@ function CustomerForm() {
                 defaultValue="Choose..."
                 name="salesperson_id"
                 value={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
-                onChange={(e) => getSalesperson(parseInt(e.target.value))}
+                onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
                 >
                     <option>Choose...</option>
                     {salespeopleOptions}

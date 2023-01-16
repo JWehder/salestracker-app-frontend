@@ -8,7 +8,7 @@ import { SalesContext } from "../context/salesContext";
 
 function EditForm() {
     const { salespeopleOptions } = useContext(SalesContext)
-    const { displayForm, getCustomer, customer, handleInputChange } = useContext(CustomerContext)
+    const { displayForm, getCustomer, customer, handleInputChange, editCustomer, getSalespersonForCustomer } = useContext(CustomerContext)
 
     return (
         <div>
@@ -25,11 +25,17 @@ function EditForm() {
             </div>
             {
                 displayForm ?
-            <Form>
-                <Row className="mb-3">
+            <Form onSubmit={editCustomer}>
+                <Row className="mb-3" onSubmit={editCustomer}>
                     <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>Salesperson</Form.Label>
-                    <Form.Select defaultValue={`${customer.salesperson_id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}>
+                    <Form.Select 
+                    name="salesperson_id"
+                    defaultValue={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
+                    value={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
+                    onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
+
+                    >
                         <option>Choose...</option>
                         {salespeopleOptions}
                     </Form.Select>

@@ -9,8 +9,8 @@ function CustomerProvider( { children }) {
     const [customer, setCustomer] = useState({
         salesperson_id: 0,
         id: 0,
-        customer_first_name: "First Name",
-        customer_last_name: "Last Name",
+        customer_first_name: "",
+        customer_last_name: "",
         units_sold: 0,
         revenue: 0,
         salesperson: {}
@@ -22,14 +22,26 @@ function CustomerProvider( { children }) {
           .then((allCustomers) => setCustomers(allCustomers))
       }, [])
 
+    function getSalespersonForCustomer(id) {
+        fetch(`http://localhost:9292/salespeople/${id}`)
+            .then((resp) => resp.json())
+            .then((salesperson) => setCustomer({
+                ...customer,
+                salesperson: {...salesperson}
+            }))
+    }
+
     function deleteCustomer(e) {
         e.preventDefault()
         fetch(`http://localhost:9292/customers/${customer.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(customer.id)
         })
+            .then((resp) => resp.json())
+            .then((customers) => setCustomers(customers))
     }
 
     function createCustomer(e) {
@@ -41,7 +53,39 @@ function CustomerProvider( { children }) {
             units_sold: customer.units_sold,
             revenue: customer.revenue
         }
-        fetch()
+        fetch('http://localhost:9292/customers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newCustomer),
+        })
+            .then((resp) => resp.json())
+            .then((customer) => setCustomers([
+                ...customers,
+                customer
+            ]))
+    }
+
+    function editCustomer(e) {
+        e.preventDefault()
+        const editedCustomer = {
+            id: customer.id,
+            salesperson_id: customer.salesperson.id,
+            customer_first_name: customer.customer_first_name,
+            customer_last_name: customer.customer_last_name,
+            units_sold: customer.units_sold,
+            revenue: customer.revenue
+        }
+        fetch(`http://localhost:9292/customers/${editedCustomer.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(editedCustomer),
+        })
+            .then((resp) => resp.json())
+            .then((customers) => setCustomers(customers))
 
     }
 
@@ -49,14 +93,14 @@ function CustomerProvider( { children }) {
         e.preventDefault()
         fetch(`http://localhost:9292/customers/${customer.id}`)
             .then((resp) => resp.json())
-            .then((customer) => setCustomer({
+            .then((receivedCustomer) => setCustomer({
                 ...customer,
-                salesperson_id: customer.salesperson_id,
-                customer_first_name: customer.customer_first_name,
-                customer_last_name: customer.customer_last_name,
-                units_sold: customer.units_sold,
-                revenue: customer.revenue,
-                salesperson: customer.salesperson
+                salesperson_id: receivedCustomer.salesperson_id,
+                customer_first_name: receivedCustomer.customer_first_name,
+                customer_last_name: receivedCustomer.customer_last_name,
+                units_sold: receivedCustomer.units_sold,
+                revenue: receivedCustomer.revenue,
+                salesperson: {...receivedCustomer.salesperson}
             }))
         setDisplayForm(!displayForm)
     }
@@ -72,7 +116,7 @@ function CustomerProvider( { children }) {
         return <CustomerRow customer= {customer} key={customer.id}/>
     })
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers, setCustomer }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }
