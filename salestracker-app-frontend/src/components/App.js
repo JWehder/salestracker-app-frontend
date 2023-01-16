@@ -11,6 +11,7 @@ import { CustomerProvider } from "../context/customerContext"
 import { SalesProvider } from "../context/salesContext";
 import EditForm from "./EditForm";
 import DeleteForm from "./DeleteForm"
+import CreateSalesForm from "./CreateSalesForm";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Create Customer"}>Create Customer</Dropdown.Item>
             <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Edit Customer"}>Edit Customer</Dropdown.Item>
             <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Delete Customer"}>Delete Customer</Dropdown.Item>
+            <Dropdown.Item as="button" onClick={handleChangeButtonClick} value={"Create Salesperson"}>Create Salesperson</Dropdown.Item>
           </DropdownButton>
           }
           
@@ -55,6 +57,7 @@ function App() {
         {displayedForm === "Create Customer" ? <><hr></hr> <CustomerForm /></> : ""}
         {displayedForm === "Edit Customer" ? <><hr></hr> <EditForm /></> : ""}
         {displayedForm === "Delete Customer" ? <><hr></hr> <DeleteForm /></> : ""}
+        {displayedForm === "Create Salesperson" ? <><hr></hr> <CreateSalesForm /></> : ""}
         <hr></hr>
       </div>
       <div>

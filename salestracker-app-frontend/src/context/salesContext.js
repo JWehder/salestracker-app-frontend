@@ -11,7 +11,7 @@ function SalesProvider( { children }) {
     const [currentSalesperson, setCurrentSalesperson] = useState({
         first_name: "",
         last_name: "",
-        quota: 0
+        quota: null
     })
 
     useEffect(() => {

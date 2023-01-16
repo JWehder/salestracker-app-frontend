@@ -16,12 +16,11 @@ function CustomerProvider( { children }) {
         salesperson: {}
     })
 
-    function handleInputChange(e) {
-        setCustomer({
-            ...customer,
-            [e.target.name]: e.target.value
-        })
-    }
+    useEffect(() => {
+        fetch('http://localhost:9292/customers')
+          .then((resp) => resp.json())
+          .then((allCustomers) => setCustomers(allCustomers))
+      }, [])
 
     function deleteCustomer(e) {
         e.preventDefault()
@@ -49,11 +48,12 @@ function CustomerProvider( { children }) {
         setDisplayForm(!displayForm)
     }
 
-    useEffect(() => {
-      fetch('http://localhost:9292/customers')
-        .then((resp) => resp.json())
-        .then((allCustomers) => setCustomers(allCustomers))
-    }, [])
+    function handleInputChange(e) {
+        setCustomer({
+            ...customer,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const displayCustomers = customers.map((customer) => {
         return <CustomerRow customer= {customer} key={customer.id}/>
