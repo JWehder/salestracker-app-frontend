@@ -39,7 +39,7 @@ function SalesProvider( { children }) {
     }
 
     const salespeopleOptions = salespeople.map((salesperson) => {
-        return <option key={salesperson.first_name}>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</option>
+        return <option key={salesperson.id}>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</option>
     })
 
     const salespeopleDropdownItems = salespeople.map((salesperson) => {

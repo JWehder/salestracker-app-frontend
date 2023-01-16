@@ -32,6 +32,10 @@ function CustomerProvider( { children }) {
         })
     }
 
+    function createCustomer() {
+        
+    }
+
     function getCustomer(e) {
         e.preventDefault()
         fetch(`http://localhost:9292/customers/${customer.id}`)
