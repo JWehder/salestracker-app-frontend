@@ -8,7 +8,11 @@ function SalesProvider( { children }) {
     const { setCustomers } = useContext(CustomerContext)
 
     const [salespeople, setSalespeople] = useState([])
-    const [currentSalesperson, setCurrentSalesperson] = useState()
+    const [currentSalesperson, setCurrentSalesperson] = useState({
+        first_name: "",
+        last_name: "",
+        quota: 0
+    })
 
     useEffect(() => {
         fetch('http://localhost:9292/salespeople')
@@ -27,6 +31,13 @@ function SalesProvider( { children }) {
         setCurrentSalesperson(salesperson)
     }
 
+    function handleInputChange(e) {
+        setCurrentSalesperson({
+            ...currentSalesperson,
+            [e.target.name]: e.target.value
+        })
+    }
+
     const salespeopleOptions = salespeople.map((salesperson) => {
         return <option key={salesperson.first_name}>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</option>
     })
@@ -36,7 +47,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ salespeopleDropdownItems, salespeople, salespeopleOptions }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }

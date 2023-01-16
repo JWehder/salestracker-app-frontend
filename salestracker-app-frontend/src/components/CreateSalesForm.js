@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form } from "react-bootstrap/lib/Navbar";
 import { Row } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
+import { SalesContext } from "../context/salesContext";
 
 function CreateSalesForm() {
+    const { currentSalesperson, handleInputChange } = useContext(SalesContext)
+
     return (
             <Row className="mb-3">
-                <Form.Label>Customer First & Last Name</Form.Label>
+                <Form.Label>Salesperson First & Last Name</Form.Label>
                 <Form.Group as={Col} className="mb-3" controlId="formGridAddress1">
                 <Form.Control 
                 placeholder="First Name" 
                 type="text"
-                value={customer.customer_first_name}
-                name="customer_first_name"
+                value={currentSalesperson.first_name}
+                name="first_name"
                 onChange={handleInputChange}
                 />
                 </Form.Group>
@@ -21,17 +24,17 @@ function CreateSalesForm() {
                 <Form.Control 
                 placeholder="Last Name" 
                 type="text"
-                value={customer.customer_last_name}
-                name="customer_last_name"
+                value={currentSalesperson.last_name}
+                name="last_name"
                 onChange={handleInputChange}
                 />
                 </Form.Group>
                 <Form.Group as={Col}>
-                <Form.Label>Units Sold</Form.Label>
+                <Form.Label>Quota</Form.Label>
                     <Form.Control
                     placeholder="Units Sold"
                     type="Number"
-                    value={customer.units_sold}
+                    value={currentSalesperson.quota}
                     name="units_sold"
                     onChange={handleInputChange}
                     />
