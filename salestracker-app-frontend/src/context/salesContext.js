@@ -5,7 +5,7 @@ import { CustomerContext } from './customerContext';
 const SalesContext = createContext();
 
 function SalesProvider( { children }) {
-    const { setCustomers } = useContext(CustomerContext)
+    const { setCustomers, setCustomer, customer } = useContext(CustomerContext)
 
     const [salespeople, setSalespeople] = useState([])
     const [currentSalesperson, setCurrentSalesperson] = useState({
@@ -29,6 +29,11 @@ function SalesProvider( { children }) {
     function setData(salesperson) {
         setCustomers(salesperson.customers)
         setCurrentSalesperson(salesperson)
+        setCustomer({
+            ...customer,
+            salesperson: {...salesperson}
+        })
+        console.log(salesperson)
     }
 
     function handleInputChange(e) {
@@ -47,7 +52,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }

@@ -8,10 +8,10 @@ import { CustomerContext } from "../context/customerContext";
 
 function CustomerForm() {
     const { salespeopleOptions, getSalesperson } = useContext(SalesContext)
-    const { customer, handleInputChange } = useContext(CustomerContext)
+    const { customer, handleInputChange, createCustomer } = useContext(CustomerContext)
 
     return (
-        <Form>
+        <Form onSubmit={createCustomer}>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Salesperson</Form.Label>
@@ -50,6 +50,7 @@ function CustomerForm() {
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col}>
+                <Form.Label>Units Sold</Form.Label>
                     <Form.Control
                     placeholder="Units Sold"
                     type="Number"
@@ -60,6 +61,7 @@ function CustomerForm() {
                 </Form.Group>
 
                 <Form.Group as={Col}>
+                    <Form.Label>Revenue</Form.Label>
                     <Form.Control
                     placeholder="Revenue"
                     type="Number"

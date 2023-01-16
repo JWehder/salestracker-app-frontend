@@ -32,8 +32,17 @@ function CustomerProvider( { children }) {
         })
     }
 
-    function createCustomer() {
-        
+    function createCustomer(e) {
+        e.preventDefault()
+        const newCustomer = {
+            salesperson_id: customer.salesperson.id,
+            customer_first_name: customer.customer_first_name,
+            customer_last_name: customer.customer_last_name,
+            units_sold: customer.units_sold,
+            revenue: customer.revenue
+        }
+        fetch()
+
     }
 
     function getCustomer(e) {
@@ -63,7 +72,7 @@ function CustomerProvider( { children }) {
         return <CustomerRow customer= {customer} key={customer.id}/>
     })
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers, setCustomer }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }
