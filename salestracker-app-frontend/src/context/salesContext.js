@@ -27,6 +27,28 @@ function SalesProvider( { children }) {
             .then((salesperson) => setData(salesperson))
     }
 
+    function createSalesperson(e) {
+        e.preventDefault()
+        const newSalesperson = {
+            first_name: currentSalesperson.first_name,
+            last_name: currentSalesperson.last_name,
+            quota: currentSalesperson.quota,
+        }
+        fetch('http://localhost:9292/customers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newSalesperson),
+        })
+            .then((resp) => resp.json())
+            .then((salesperson) => setCustomers([
+                ...salespeople,
+                salesperson
+            ]))
+    }
+    }
+
     function setData(salesperson) {
         setCustomers(salesperson.customers)
         setCurrentSalesperson(salesperson)
