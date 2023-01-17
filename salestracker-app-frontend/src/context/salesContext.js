@@ -34,7 +34,7 @@ function SalesProvider( { children }) {
             last_name: currentSalesperson.last_name,
             quota: currentSalesperson.quota,
         }
-        fetch('http://localhost:9292/customers', {
+        fetch('http://localhost:9292/salespeople', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,11 +42,10 @@ function SalesProvider( { children }) {
             body: JSON.stringify(newSalesperson),
         })
             .then((resp) => resp.json())
-            .then((salesperson) => setCustomers([
+            .then((salesperson) => setSalespeople([
                 ...salespeople,
                 salesperson
             ]))
-    }
     }
 
     function setData(salesperson) {
@@ -70,7 +69,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }
