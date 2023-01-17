@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import CustomerTable from './CustomerTable';
 import CloseButton from 'react-bootstrap/CloseButton';
-import InfoCard from "./InfoCard";
-import { Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
+import InfoCards from "./InfoCards";
 import CustomerForm from "./CustomerForm";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -33,7 +31,7 @@ function App() {
     <SalesProvider>
     <div className="App">
       <div className="webpageHeader">
-            <h1>Sales Alignments</h1>
+            <h1>Sales Tracker</h1>
             <hr></hr>
       </div>
       <div>
@@ -61,17 +59,7 @@ function App() {
         <hr></hr>
       </div>
       <div>
-        <Row xs={1} md={3} className="g-4">
-          <Col>
-            <InfoCard />
-          </Col>
-          <Col>
-            <InfoCard />
-          </Col>
-          <Col>
-            <InfoCard />
-          </Col>
-        </Row>
+        <InfoCards />
         <hr></hr>
       </div>
       <div>

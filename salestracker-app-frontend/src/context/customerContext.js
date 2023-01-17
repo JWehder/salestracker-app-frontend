@@ -16,6 +16,10 @@ function CustomerProvider( { children }) {
         salesperson: {}
     })
 
+    const rev_total = customers.reduce((accumulator, customer) => {
+        return accumulator += customer.revenue
+    }, 0)
+    
     useEffect(() => {
         fetch('http://localhost:9292/customers')
           .then((resp) => resp.json())
@@ -116,7 +120,7 @@ function CustomerProvider( { children }) {
         return <CustomerRow customer= {customer} key={customer.id}/>
     })
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, rev_total }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }

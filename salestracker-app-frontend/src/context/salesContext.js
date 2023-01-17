@@ -15,6 +15,15 @@ function SalesProvider( { children }) {
         customers: []
     })
 
+    const quota_total = salespeople.reduce((accumulator, salesperson) => {
+        if (currentSalesperson.quota === null) {
+            return accumulator += salesperson.quota
+        } else {
+            return accumulator += currentSalesperson.quota
+        }
+    }, 0)
+
+
     useEffect(() => {
         fetch('http://localhost:9292/salespeople')
             .then((resp) => resp.json())
@@ -69,7 +78,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }
