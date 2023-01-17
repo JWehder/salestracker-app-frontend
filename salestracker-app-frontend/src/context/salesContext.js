@@ -31,9 +31,7 @@ function SalesProvider( { children }) {
     }, [])
 
     function getSalesperson(id) {
-        fetch(`http://localhost:9292/salespeople/${id}`)
-            .then((resp) => resp.json())
-            .then((salesperson) => setData(salesperson))
+        salesperson = salespeople.find(() => salesperso)
     }
 
     function createSalesperson(e) {
