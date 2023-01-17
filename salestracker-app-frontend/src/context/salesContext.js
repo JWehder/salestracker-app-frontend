@@ -14,6 +14,7 @@ function SalesProvider( { children }) {
         quota: null,
         customers: []
     })
+    const
 
     const quota_total = salespeople.reduce((accumulator, salesperson) => {
         if (currentSalesperson.quota === null) {

@@ -4,6 +4,7 @@ import { CustomerContext } from "../context/customerContext";
 import { SalesContext } from "../context/salesContext";
 import { Col } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 function InfoCard() {
     const { rev_total } = useContext(CustomerContext)
@@ -11,6 +12,16 @@ function InfoCard() {
 
     const percentageOfQuota = () => {
         return Math.round((rev_total / quota_total) * 100)
+    }
+
+    const progressBar = () => {
+        if (percentageOfQuota() > 100) {
+            return <ProgressBar striped variant="success" now={percentageOfQuota()} label={`${percentageOfQuota()}%`} />
+        } else if (percentageOfQuota() > 60 && percentageOfQuota() < 100) {
+            return <ProgressBar striped variant="warning" now={percentageOfQuota()} label={`${percentageOfQuota()}%`} />
+        } else {
+            return <ProgressBar striped variant="danger" now={percentageOfQuota()} label={`${percentageOfQuota()}%`} />
+        }
     }
 
     return (
@@ -35,6 +46,7 @@ function InfoCard() {
                         `The sales team has accumulated ${rev_total} on a ${quota_total} quota`
                     }
                     </Card.Text>
+                    {progressBar()}
                 </Card.Body>
                 </Card>
             </Col>
