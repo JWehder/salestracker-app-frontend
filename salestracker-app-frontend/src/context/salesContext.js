@@ -31,7 +31,8 @@ function SalesProvider( { children }) {
     }, [])
 
     function getSalesperson(id) {
-        salesperson = salespeople.find(() => salesperso)
+        const salesperson = salespeople.find((salesperson) => salesperson.id === id)
+        setData(salesperson)
     }
 
     function createSalesperson(e) {

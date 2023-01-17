@@ -9,8 +9,12 @@ function InfoCard() {
     const { rev_total } = useContext(CustomerContext)
     const { quota_total, currentSalesperson } = useContext(SalesContext)
 
+    const percentageOfQuota = () => {
+        return Math.round((rev_total / quota_total) * 100)
+    }
+
     return (
-        <Row xs={1} md={2} className="g-4" style={{"text-align": "center"}}>
+        <Row xs={1} md={2} className="g-4" style={{"textAlign": "center"}}>
             <Col>
                 <Card
                 bg={'Light'.toLowerCase()}
@@ -26,7 +30,7 @@ function InfoCard() {
                     <Card.Text>
                     {
                         currentSalesperson.quota !== 0 ?
-                        `${currentSalesperson.first_name} ${currentSalesperson.last_name} has accumulated ${rev_total} on a ${quota_total} quota.`
+                        `${currentSalesperson.first_name} ${currentSalesperson.last_name} has accumulated $${rev_total} revenue on a $${quota_total} quota. ${currentSalesperson.first_name} has attained ${percentageOfQuota()}% of their quota`
                         :
                         `The sales team has accumulated ${rev_total} on a ${quota_total} quota`
                     }
@@ -42,7 +46,7 @@ function InfoCard() {
                 style={{ width: '18rem' }}
                 className="mb-2"
                 >
-                <Card.Header>Data Name</Card.Header>
+                <Card.Header>Number of Customers</Card.Header>
                 <Card.Body>
                     <Card.Title>{'Light'} Data Name </Card.Title>
                     <Card.Text>
