@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Card from 'react-bootstrap/Card';
+import { CustomerContext } from "../context/customerContext";
+import { SalesContext } from "../context/salesContext";
 
 function InfoCard() {
+    const [totals, setTotals] = useState({
+        total_quota: 0,
+        total_rev: 0,
+    })
 
+    const { customers } = useContext(CustomerContext)
+    const { salespeople } = useContext(SalesContext)
+
+    const reducer = (accumulator, metric) => {
+        
+    }
 
     return (
         <>
@@ -13,7 +25,7 @@ function InfoCard() {
             style={{ width: '18rem' }}
             className="mb-2"
             >
-            <Card.Header>Header</Card.Header>
+            <Card.Header>Data Name</Card.Header>
             <Card.Body>
                 <Card.Title>{'Light'} Data Name </Card.Title>
                 <Card.Text>
