@@ -25,16 +25,12 @@ function InfoCard() {
     }
 
     return (
-        <div style={{"textAlign": "center"}}>
-            <Row >
-                <Col>
-                    <Card
-                    bg={'Light'.toLowerCase()}
-                    key={'Light'}
-                    text={'Light'.toLowerCase() === 'light' ? 'dark' : 'white'}
-                    style={{ width: '18rem' }}
-                    className="mb-2"
-                    >
+            <div style={{ textAlign: 'center' }} >
+                <Card
+                bg={'Light'.toLowerCase()}
+                style={{ width: '18rem' }}
+                className="text-center"
+                >
                     <Card.Header>Quota vs. Revenue</Card.Header>
                     <Card.Body>
                         <Card.Title> Revenue: {rev_total} </Card.Title>
@@ -49,10 +45,8 @@ function InfoCard() {
                         </Card.Text>
                         {progressBar()}
                     </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </div>
+                </Card>
+            </div>
     )
 }
 

@@ -24,7 +24,10 @@ function CustomerProvider( { children }) {
     useEffect(() => {
         fetch('http://localhost:9292/customers')
           .then((resp) => resp.json())
-          .then((allCustomers) => setCustomers(allCustomers))
+          .then((allCustomers) => {
+            setCustomers(allCustomers)
+            setCurrentCustomers(allCustomers)
+        })
       }, [])
 
     function getSalespersonForCustomer(id) {
@@ -46,7 +49,10 @@ function CustomerProvider( { children }) {
             body: JSON.stringify(customer.id)
         })
             .then((resp) => resp.json())
-            .then((customers) => setCustomers(customers))
+            .then((customers) => {
+                setCustomers(customers)
+                setCurrentCustomers(customers)
+            })
     }
 
     function createCustomer(e) {
@@ -66,10 +72,10 @@ function CustomerProvider( { children }) {
             body: JSON.stringify(newCustomer),
         })
             .then((resp) => resp.json())
-            .then((customer) => setCustomers([
-                ...customers,
-                customer
-            ]))
+            .then((customer) => {
+                setCustomers([...customers, customer])
+                setCurrentCustomers([...currentCustomers, customer])
+            })
     }
 
     function editCustomer(e) {
@@ -90,7 +96,7 @@ function CustomerProvider( { children }) {
             body: JSON.stringify(editedCustomer),
         })
             .then((resp) => resp.json())
-            .then((customers) => setCustomers(customers))
+            .then((customers) => {setCustomers(customers)})
 
     }
 
