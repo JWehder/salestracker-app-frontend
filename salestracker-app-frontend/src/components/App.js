@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import CustomerTable from './CustomerTable';
 import CloseButton from 'react-bootstrap/CloseButton';
 import InfoCards from "./InfoCards";
 import CustomerForm from "./CustomerForm";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { CustomerProvider } from "../context/customerContext"
+import { CustomerContext, CustomerProvider } from "../context/customerContext"
 import { SalesProvider } from "../context/salesContext";
 import EditForm from "./EditForm";
 import DeleteForm from "./DeleteForm"
@@ -13,7 +13,7 @@ import CreateSalesForm from "./CreateSalesForm";
 
 
 function App() {
-  const { setCustomer } = useCo
+  const { setCustomer } = useContext(CustomerContext)
 
   const [changeButton, setChangeButton] = useState(false)
   const [displayedForm, setDisplayedForm] = useState("Make Changes")
@@ -29,8 +29,7 @@ function App() {
   } 
 
   return (
-    <CustomerProvider>
-    <SalesProvider>
+
     <div className="App">
       <div className="webpageHeader">
             <h1>Sales Tracker</h1>
