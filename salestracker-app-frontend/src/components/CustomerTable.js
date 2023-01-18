@@ -11,6 +11,7 @@ function CustomerTable() {
 
     return (
         <>
+        <hr></hr>
         <DropdownButton defaultValue="All" id="dropdown-item-button" title="Select Salesperson">
           <Dropdown.ItemText>Display a Saleperson's Customers</Dropdown.ItemText>
           <Dropdown.Divider></Dropdown.Divider>

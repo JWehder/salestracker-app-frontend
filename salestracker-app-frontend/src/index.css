@@ -27,3 +27,9 @@ code {
   font-size: small;
 }
 
+.text-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

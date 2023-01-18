@@ -27,6 +27,12 @@ function SalesProvider( { children }) {
     function getSalesperson(id) {
         if (id === 0) {
             setCurrentCustomers([...customers])
+            setCurrentSalesperson({
+                first_name: "",
+                last_name: "",
+                quota: null,
+                customers: []
+            })
         } else {
             const salesperson = salespeople.find((salesperson) => salesperson.id === id)
             setCurrentCustomers(salesperson.customers)

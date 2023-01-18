@@ -58,7 +58,7 @@ function App() {
         {displayedForm === "Create Salesperson" ? <><hr></hr> <CreateSalesForm /></> : ""}
         <hr></hr>
       </div>
-      <div>
+      <div className="text-center">
         <InfoCards />
         <hr></hr>
       </div>

@@ -6,7 +6,7 @@ const CustomerContext = createContext();
 function CustomerProvider( { children }) {
     const [displayForm, setDisplayForm] = useState(false)
     const [customers, setCustomers] = useState([])
-    const [currentCustomers, setCurrentCustomers] = useState([...customers])
+    const [currentCustomers, setCurrentCustomers] = useState([])
     const [customer, setCustomer] = useState({
         salesperson_id: 0,
         id: 0,
@@ -17,7 +17,7 @@ function CustomerProvider( { children }) {
         salesperson: {}
     })
 
-    const rev_total = customers.reduce((accumulator, customer) => {
+    const rev_total = currentCustomers.reduce((accumulator, customer) => {
         return accumulator += customer.revenue
     }, 0)
     
@@ -96,7 +96,10 @@ function CustomerProvider( { children }) {
             body: JSON.stringify(editedCustomer),
         })
             .then((resp) => resp.json())
-            .then((customers) => {setCustomers(customers)})
+            .then((customers) => {
+                setCustomers(customers)
+                setCurrentCustomers(customers)
+            })
 
     }
 
