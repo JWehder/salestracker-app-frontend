@@ -25,32 +25,34 @@ function InfoCard() {
     }
 
     return (
-        <Row xs={1} md={1} className="g-4" style={{"textAlign": "center"}}>
-            <Col>
-                <Card
-                bg={'Light'.toLowerCase()}
-                key={'Light'}
-                text={'Light'.toLowerCase() === 'light' ? 'dark' : 'white'}
-                style={{ width: '18rem' }}
-                className="mb-2"
-                >
-                <Card.Header>Quota vs. Revenue</Card.Header>
-                <Card.Body>
-                    <Card.Title> Revenue: {rev_total} </Card.Title>
-                    <Card.Title> Quota: {quota_total} </Card.Title>
-                    <Card.Text>
-                    {
-                        currentSalesperson.quota !== 0 ?
-                        `${currentSalesperson.first_name} ${currentSalesperson.last_name} has accumulated $${rev_total} revenue on a $${quota_total} quota. ${currentSalesperson.first_name} has attained ${percentageOfQuota()}% of their quota`
-                        :
-                        `The sales team has accumulated ${rev_total} on a ${quota_total} quota`
-                    }
-                    </Card.Text>
-                    {progressBar()}
-                </Card.Body>
-                </Card>
-            </Col>
-        </Row>
+        <div style={{"textAlign": "center"}}>
+            <Row >
+                <Col>
+                    <Card
+                    bg={'Light'.toLowerCase()}
+                    key={'Light'}
+                    text={'Light'.toLowerCase() === 'light' ? 'dark' : 'white'}
+                    style={{ width: '18rem' }}
+                    className="mb-2"
+                    >
+                    <Card.Header>Quota vs. Revenue</Card.Header>
+                    <Card.Body>
+                        <Card.Title> Revenue: {rev_total} </Card.Title>
+                        <Card.Title> Quota: {quota_total} </Card.Title>
+                        <Card.Text>
+                        {
+                            currentSalesperson.quota !== 0 ?
+                            `${currentSalesperson.first_name} ${currentSalesperson.last_name} has accumulated $${rev_total} revenue on a $${quota_total} quota. ${currentSalesperson.first_name} has attained ${percentageOfQuota()}% of their quota`
+                            :
+                            `The sales team has accumulated ${rev_total} on a ${quota_total} quota`
+                        }
+                        </Card.Text>
+                        {progressBar()}
+                    </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </div>
     )
 }
 
