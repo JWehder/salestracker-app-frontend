@@ -13,6 +13,8 @@ import CreateSalesForm from "./CreateSalesForm";
 
 
 function App() {
+  const { setCustomer } = useCo
+
   const [changeButton, setChangeButton] = useState(false)
   const [displayedForm, setDisplayedForm] = useState("Make Changes")
 
