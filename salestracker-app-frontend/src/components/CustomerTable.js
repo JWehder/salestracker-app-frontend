@@ -7,13 +7,14 @@ import { SalesContext } from "../context/salesContext";
 
 function CustomerTable() {
   const { displayCustomers } = useContext(CustomerContext)
-  const { salespeopleDropdownItems } = useContext(SalesContext)
+  const { salespeopleDropdownItems, getSalesperson } = useContext(SalesContext)
 
     return (
         <>
-        <DropdownButton id="dropdown-item-button" title="Select Salesperson">
+        <DropdownButton defaultValue="All" id="dropdown-item-button" title="Select Salesperson">
           <Dropdown.ItemText>Display a Saleperson's Customers</Dropdown.ItemText>
           <Dropdown.Divider></Dropdown.Divider>
+          <Dropdown.Item onClick={() => getSalesperson(0)} as="button" value="All">All</Dropdown.Item>
           {salespeopleDropdownItems}
         </DropdownButton>
         <hr></hr>

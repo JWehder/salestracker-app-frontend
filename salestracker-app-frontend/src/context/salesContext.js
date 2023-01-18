@@ -5,7 +5,7 @@ import { CustomerContext } from './customerContext';
 const SalesContext = createContext();
 
 function SalesProvider( { children }) {
-    const { setCustomers } = useContext(CustomerContext)
+    const { customers, setCurrentCustomers } = useContext(CustomerContext)
 
     const [salespeople, setSalespeople] = useState([])
     const [currentSalesperson, setCurrentSalesperson] = useState({
@@ -14,7 +14,7 @@ function SalesProvider( { children }) {
         quota: null,
         customers: []
     })
-    const
+    const [selectedSalesperson, setSelectedSalesperson] = useState("All")
 
     const quota_total = salespeople.reduce((accumulator, salesperson) => {
         if (currentSalesperson.quota === null) {
@@ -24,17 +24,21 @@ function SalesProvider( { children }) {
         }
     }, 0)
 
+    function getSalesperson(id) {
+        if (id === 0) {
+            setCurrentCustomers([...customers])
+        } else {
+            const salesperson = salespeople.find((salesperson) => salesperson.id === id)
+            setCurrentCustomers(salesperson.customers)
+            setCurrentSalesperson(salesperson)
+        }
+    }
 
     useEffect(() => {
         fetch('http://localhost:9292/salespeople')
             .then((resp) => resp.json())
             .then((salespeople) => setSalespeople(salespeople))
     }, [])
-
-    function getSalesperson(id) {
-        const salesperson = salespeople.find((salesperson) => salesperson.id === id)
-        setData(salesperson)
-    }
 
     function createSalesperson(e) {
         e.preventDefault()
@@ -57,11 +61,6 @@ function SalesProvider( { children }) {
             ]))
     }
 
-    function setData(salesperson) {
-        setCustomers(salesperson.customers)
-        setCurrentSalesperson(salesperson)
-    }
-
     function handleInputChange(e) {
         setCurrentSalesperson({
             ...currentSalesperson,
@@ -78,7 +77,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }

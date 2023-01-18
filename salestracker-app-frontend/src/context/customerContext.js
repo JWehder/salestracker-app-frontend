@@ -6,6 +6,7 @@ const CustomerContext = createContext();
 function CustomerProvider( { children }) {
     const [displayForm, setDisplayForm] = useState(false)
     const [customers, setCustomers] = useState([])
+    const [currentCustomers, setCurrentCustomers] = useState([...customers])
     const [customer, setCustomer] = useState({
         salesperson_id: 0,
         id: 0,
@@ -116,11 +117,11 @@ function CustomerProvider( { children }) {
         })
     }
 
-    const displayCustomers = customers.map((customer) => {
+    const displayCustomers = currentCustomers.map((customer) => {
         return <CustomerRow customer= {customer} key={customer.id}/>
     })
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, rev_total }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, rev_total, currentCustomers, setCurrentCustomers }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }
