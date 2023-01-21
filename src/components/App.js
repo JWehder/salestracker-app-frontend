@@ -5,15 +5,16 @@ import InfoCards from "./InfoCards";
 import CustomerForm from "./CustomerForm";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { CustomerContext, CustomerProvider } from "../context/customerContext"
-import { SalesProvider } from "../context/salesContext";
+import { CustomerContext } from "../context/customerContext"
 import EditForm from "./EditForm";
 import DeleteForm from "./DeleteForm"
 import CreateSalesForm from "./CreateSalesForm";
+import { SalesContext } from "../context/salesContext";
 
 
 function App() {
   const { setCustomer } = useContext(CustomerContext)
+  const { setCurrentSalesperson } = useContext(SalesContext)
 
   const [changeButton, setChangeButton] = useState(false)
   const [displayedForm, setDisplayedForm] = useState("Make Changes")
@@ -26,6 +27,22 @@ function App() {
   function handleCloseButtonClick() {
     setChangeButton(!changeButton)
     setDisplayedForm("Make Changes")
+    setCustomer({
+      salesperson_id: 0,
+      id: 0,
+      customer_first_name: "",
+      customer_last_name: "",
+      units_sold: 0,
+      revenue: 0,
+      salesperson: {}
+      })
+      setCurrentSalesperson({
+        first_name: "",
+        last_name: "",
+        quota: 0,
+        customers: []
+      })
+    
   } 
 
   return (
@@ -60,15 +77,13 @@ function App() {
         <hr></hr>
       </div>
       <div className="text-center">
-        <InfoCards />
+        {displayedForm === "Create Salesperson" ? "" : <InfoCards />}
         <hr></hr>
       </div>
-      <div>
+      <div className="table-container">
         <CustomerTable />
       </div>
     </div>
-    </SalesProvider>
-    </CustomerProvider>
   );
 }
 

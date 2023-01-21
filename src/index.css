@@ -25,10 +25,17 @@ code {
 
 .table {
   font-size: small;
+  display: inline-block;
 }
 
 .text-center {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-container {
+  display: inline-table;
   align-items: center;
   justify-content: center;
 }

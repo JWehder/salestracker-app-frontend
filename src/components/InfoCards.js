@@ -14,7 +14,7 @@ function InfoCard() {
 
     const textData = () => {
         if (currentSalesperson.first_name === "") {
-            return `The sales team as a whole has accumulated $${rev_total} on a $${quota_total} quota. The sales team has attained ${percentageOfQuota()}% of their quota.`
+            return `The sales team as a whole has accumulated $${rev_total} revenue on a $${quota_total} quota. The sales team has attained ${percentageOfQuota()}% of their quota.`
         } else {
             return `${currentSalesperson.first_name} ${currentSalesperson.last_name} has accumulated $${rev_total} revenue on a $${quota_total} quota. ${currentSalesperson.first_name} has attained ${percentageOfQuota()}% of their quota.`
         }
@@ -35,10 +35,12 @@ function InfoCard() {
                 bg={'Light'.toLowerCase()}
                 style={{ width: '18rem' }}
                 >
-                    <Card.Header>Quota vs. Revenue</Card.Header>
+                    <Card.Header as={"h5"}>Quota vs. Revenue</Card.Header>
                     <Card.Body>
-                        <Card.Title> Revenue: {rev_total} </Card.Title>
-                        <Card.Title> Quota: {quota_total} </Card.Title>
+                        <Card.Title as={"h9"}> Revenue: ${rev_total} <br></br></Card.Title>
+                        
+                        <Card.Title as={"h9"}> Quota: ${quota_total} </Card.Title>
+                        <hr></hr>
                         <Card.Text>
                         {textData()}
                         </Card.Text>

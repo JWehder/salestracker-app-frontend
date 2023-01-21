@@ -1,9 +1,12 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import CustomerRow from '../components/CustomerRow';
+import { SalesContext } from './salesContext';
 
 const CustomerContext = createContext();
 
 function CustomerProvider( { children }) {
+    const { salespeople } = useContext(SalesContext)
+
     const [displayForm, setDisplayForm] = useState(false)
     const [customers, setCustomers] = useState([])
     const [currentCustomers, setCurrentCustomers] = useState([])
@@ -31,12 +34,11 @@ function CustomerProvider( { children }) {
       }, [])
 
     function getSalespersonForCustomer(id) {
-        fetch(`http://localhost:9292/salespeople/${id}`)
-            .then((resp) => resp.json())
-            .then((salesperson) => setCustomer({
-                ...customer,
-                salesperson: {...salesperson}
-            }))
+        const salesperson = salespeople.find((salesperson) => salesperson.id === id)
+        setCustomer({
+            ...customer,
+            salesperson: {...salesperson}
+        })
     }
 
     function deleteCustomer(e) {

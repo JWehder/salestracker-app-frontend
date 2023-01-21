@@ -11,13 +11,13 @@ function SalesProvider( { children }) {
     const [currentSalesperson, setCurrentSalesperson] = useState({
         first_name: "",
         last_name: "",
-        quota: null,
+        quota: 0,
         customers: []
     })
     const [selectedSalesperson, setSelectedSalesperson] = useState("All")
 
     const quota_total = salespeople.reduce((accumulator, salesperson) => {
-        if (currentSalesperson.quota === null) {
+        if (currentSalesperson.quota === 0) {
             return accumulator += salesperson.quota
         } else {
             return accumulator += currentSalesperson.quota
@@ -30,7 +30,7 @@ function SalesProvider( { children }) {
             setCurrentSalesperson({
                 first_name: "",
                 last_name: "",
-                quota: null,
+                quota: 0,
                 customers: []
             })
         } else {
@@ -65,6 +65,12 @@ function SalesProvider( { children }) {
                 ...salespeople,
                 salesperson
             ]))
+        setCurrentSalesperson({
+            first_name: "",
+            last_name: "",
+            quota: 0,
+            customers: [] 
+            })
     }
 
     function handleInputChange(e) {
@@ -83,7 +89,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }
