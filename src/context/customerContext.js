@@ -1,11 +1,9 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import CustomerRow from '../components/CustomerRow';
-import { SalesContext } from './salesContext';
 
 const CustomerContext = createContext();
 
-function CustomerProvider( { children }) {
-    const { salespeople } = useContext(SalesContext)
+function CustomerProvider( { children } ) {
 
     const [displayForm, setDisplayForm] = useState(false)
     const [customers, setCustomers] = useState([])
@@ -34,10 +32,10 @@ function CustomerProvider( { children }) {
       }, [])
 
     function getSalespersonForCustomer(id) {
-        const salesperson = salespeople.find((salesperson) => salesperson.id === id)
+        const customer = customers.find((customer) => customer.salesperson_id === id)
         setCustomer({
             ...customer,
-            salesperson: {...salesperson}
+            salesperson: {...customer.salesperson}
         })
     }
 

@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import CustomerTable from './CustomerTable';
 import CloseButton from 'react-bootstrap/CloseButton';
 import InfoCards from "./InfoCards";
 import CustomerForm from "./CustomerForm";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { CustomerContext } from "../context/customerContext"
 import EditForm from "./EditForm";
 import DeleteForm from "./DeleteForm"
 import CreateSalesForm from "./CreateSalesForm";
+import { CustomerContext } from "../context/customerContext";
 import { SalesContext } from "../context/salesContext";
 
 
@@ -36,13 +36,12 @@ function App() {
       revenue: 0,
       salesperson: {}
       })
-      setCurrentSalesperson({
-        first_name: "",
-        last_name: "",
-        quota: 0,
-        customers: []
-      })
-    
+    setCurrentSalesperson({
+      first_name: "",
+      last_name: "",
+      quota: 0,
+      customers: []
+    })
   } 
 
   return (
