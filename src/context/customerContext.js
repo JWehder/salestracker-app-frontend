@@ -73,6 +73,8 @@ function CustomerProvider( { children } ) {
         })
             .then((resp) => resp.json())
             .then((customer) => {
+                const salesperson = salespeople.find((salesperson) => salesperson.id === newCustomer.salesperson_id)
+                salesperson.customers = [...salesperson.customers, newCustomer]
                 setCustomers([...customers, customer])
                 setCurrentCustomers([...currentCustomers, customer])
             })
@@ -126,7 +128,7 @@ function CustomerProvider( { children } ) {
         })
     }
 
-    const displayCustomers = currentCustomers.map((customer) => {
+    const displayCustomers = salespeople.customers.map((customer) => {
         return <CustomerRow customer= {customer} key={customer.id}/>
     })
 
