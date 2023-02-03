@@ -7,7 +7,7 @@ import { SalesContext } from "../context/salesContext";
 
 function CustomerTable() {
   const { displayCustomers } = useContext(CustomerContext)
-  const { salespeopleDropdownItems, getSalesperson } = useContext(SalesContext)
+  const { salespeopleDropdownItems, getSalesperson, salespersonDropdown, setSalespersonDropdownValue } = useContext(SalesContext)
 
     return (
         <>

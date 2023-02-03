@@ -6,8 +6,8 @@ const CustomerContext = createContext();
 function CustomerProvider( { children } ) {
 
     const [displayForm, setDisplayForm] = useState(false)
-    const [customers, setCustomers] = useState([])
-    const [currentCustomers, setCurrentCustomers] = useState([])
+    // const [customers, setCustomers] = useState([])
+    // const [currentCustomers, setCurrentCustomers] = useState([])
     const [customer, setCustomer] = useState({
         salesperson_id: 0,
         id: 0,
@@ -18,21 +18,21 @@ function CustomerProvider( { children } ) {
         salesperson: {}
     })
 
-    const rev_total = currentCustomers.reduce((accumulator, customer) => {
-        return accumulator += customer.revenue
-    }, 0)
+    // const rev_total = currentCustomers.reduce((accumulator, customer) => {
+    //    return accumulator += customer.revenue
+    // }, 0)
     
     useEffect(() => {
         fetch('http://localhost:9292/customers')
           .then((resp) => resp.json())
           .then((allCustomers) => {
-            setCustomers(allCustomers)
-            setCurrentCustomers(allCustomers)
+            // setCustomers(allCustomers)
+            // setCurrentCustomers(allCustomers)
         })
       }, [])
 
     function getSalespersonForCustomer(id) {
-        const customer = customers.find((customer) => customer.salesperson_id === id)
+        // const customer = customers.find((customer) => customer.salesperson_id === id)
         setCustomer({
             ...customer,
             salesperson: {...customer.salesperson}
@@ -50,8 +50,8 @@ function CustomerProvider( { children } ) {
         })
             .then((resp) => resp.json())
             .then((customers) => {
-                setCustomers(customers)
-                setCurrentCustomers(customers)
+                // setCustomers(customers)
+                // setCurrentCustomers(customers)
             })
     }
 
@@ -73,8 +73,8 @@ function CustomerProvider( { children } ) {
         })
             .then((resp) => resp.json())
             .then((customer) => {                
-                setCustomers([...customers, customer])
-                setCurrentCustomers([...currentCustomers, customer])
+                // setCustomers([...customers, customer])
+                // setCurrentCustomers([...currentCustomers, customer])
             })
     }
 
@@ -97,8 +97,8 @@ function CustomerProvider( { children } ) {
         })
             .then((resp) => resp.json())
             .then((customers) => {
-                setCustomers(customers)
-                setCurrentCustomers(customers)
+                // setCustomers(customers)
+                // setCurrentCustomers(customers)
             })
 
     }
@@ -126,11 +126,13 @@ function CustomerProvider( { children } ) {
         })
     }
 
-    const displayCustomers = currentCustomers.map((customer) => {
-        return <CustomerRow customer= {customer} key={customer.id}/>
-    })
+    //const displayCustomers = currentCustomers.map((customer) => {
+    //    return <CustomerRow customer= {customer} key={customer.id}/>
+    //})
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, customers, handleInputChange, customer, getCustomer, displayCustomers, setCustomers, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, rev_total, currentCustomers, setCurrentCustomers }}>{children}</CustomerContext.Provider>
+    // displayCustomers, customers, setCustomers, rev_total, currentCustomers, setCurrentCustomers
+
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, getCustomer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }

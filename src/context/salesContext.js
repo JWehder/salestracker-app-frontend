@@ -5,8 +5,10 @@ import { CustomerContext } from './customerContext';
 const SalesContext = createContext();
 
 function SalesProvider( { children }) {
-    const { customers, setCurrentCustomers } = useContext(CustomerContext)
-
+    // delete customers and the get request
+    // run a function that maps customers to an array for currentCustomers placed at the start
+    const { customers } = useContext(CustomerContext)
+    // setCurrentCustomers
     const [salespeople, setSalespeople] = useState([])
     const [currentSalesperson, setCurrentSalesperson] = useState({
         first_name: "",
@@ -15,6 +17,7 @@ function SalesProvider( { children }) {
         customers: []
     })
     const [selectedSalesperson, setSelectedSalesperson] = useState("All")
+    const [currentCustomers, setCurrentCustomers] = useState([])
 
     const quota_total = salespeople.reduce((accumulator, salesperson) => {
         if (currentSalesperson.quota === 0) {
@@ -37,7 +40,18 @@ function SalesProvider( { children }) {
     useEffect(() => {
         fetch('http://localhost:9292/salespeople')
             .then((resp) => resp.json())
-            .then((salespeople) => setSalespeople(salespeople))
+            .then((salespeople) => {
+                setSalespeople(salespeople)
+                let allCustomers = []
+                salespeople.forEach((salesperson) => {
+                    if (salesperson.customers.length > 0) {
+                        salesperson.customers.forEach((customer) => {
+                            allCustomers = [...allCustomers, customer]
+                        })
+                    }
+                })
+                setCurrentCustomers(allCustomers)
+            })
     }, [])
 
     function createSalesperson(e) {
@@ -46,6 +60,7 @@ function SalesProvider( { children }) {
             first_name: currentSalesperson.first_name,
             last_name: currentSalesperson.last_name,
             quota: currentSalesperson.quota,
+            customers: []
         }
         fetch('http://localhost:9292/salespeople', {
             method: 'POST',
