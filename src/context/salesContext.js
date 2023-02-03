@@ -24,19 +24,13 @@ function SalesProvider( { children }) {
         }
     }, 0)
 
-    function getSalesperson(id) {
-        if (id === 0) {
-            setCurrentCustomers([...customers])
-            setCurrentSalesperson({
-                first_name: "",
-                last_name: "",
-                quota: 0,
-                customers: []
-            })
+    function getSalesperson(value) {
+        if (value === "All") {
+            const allCustomers = salespeople.map((salesperson) => salesperson.customers)
+            setCurrentCustomers(allCustomers)
         } else {
-            const salesperson = salespeople.find((salesperson) => salesperson.id === id)
+            const salesperson = salespeople.find((salesperson) => salesperson.id === parseInt(value))
             setCurrentCustomers(salesperson.customers)
-            setCurrentSalesperson(salesperson)
         }
     }
 
