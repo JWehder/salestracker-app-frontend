@@ -9,11 +9,11 @@ import { SalesProvider } from './context/salesContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <CustomerProvider>
   <SalesProvider>
+  <CustomerProvider>
     <App />
-  </SalesProvider>
   </CustomerProvider>
+  </SalesProvider>
 
 );
 

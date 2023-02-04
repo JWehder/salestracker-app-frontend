@@ -1,10 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import CustomerRow from '../components/CustomerRow';
+import { SalesContext } from './salesContext';
 
 const CustomerContext = createContext();
 
 function CustomerProvider( { children } ) {
-
+    const { salespeople, setSalespeople, currentCustomers } = useContext(SalesContext)
     const [displayForm, setDisplayForm] = useState(false)
     // const [customers, setCustomers] = useState([])
     // const [currentCustomers, setCurrentCustomers] = useState([])
@@ -21,15 +22,6 @@ function CustomerProvider( { children } ) {
     // const rev_total = currentCustomers.reduce((accumulator, customer) => {
     //    return accumulator += customer.revenue
     // }, 0)
-    
-    useEffect(() => {
-        fetch('http://localhost:9292/customers')
-          .then((resp) => resp.json())
-          .then((allCustomers) => {
-            // setCustomers(allCustomers)
-            // setCurrentCustomers(allCustomers)
-        })
-      }, [])
 
     function getSalespersonForCustomer(id) {
         // const customer = customers.find((customer) => customer.salesperson_id === id)
@@ -49,9 +41,10 @@ function CustomerProvider( { children } ) {
             body: JSON.stringify(customer.id)
         })
             .then((resp) => resp.json())
-            .then((customers) => {
+            .then((salesperson) => {
                 // setCustomers(customers)
                 // setCurrentCustomers(customers)
+                setSalespeople([...salespeople, salesperson])
             })
     }
 
@@ -72,7 +65,17 @@ function CustomerProvider( { children } ) {
             body: JSON.stringify(newCustomer),
         })
             .then((resp) => resp.json())
-            .then((customer) => {                
+            .then((salesperson) => {
+                setSalespeople([...salespeople, salesperson])
+                setCustomer({        
+                    salesperson_id: 0,
+                    id: 0,
+                    customer_first_name: "",
+                    customer_last_name: "",
+                    units_sold: 0,
+                    revenue: 0,
+                    salesperson: {}
+                })
                 // setCustomers([...customers, customer])
                 // setCurrentCustomers([...currentCustomers, customer])
             })
@@ -96,7 +99,8 @@ function CustomerProvider( { children } ) {
             body: JSON.stringify(editedCustomer),
         })
             .then((resp) => resp.json())
-            .then((customers) => {
+            .then((salesperson) => {
+                setSalespeople([...salespeople, salesperson])
                 // setCustomers(customers)
                 // setCurrentCustomers(customers)
             })
@@ -105,17 +109,18 @@ function CustomerProvider( { children } ) {
 
     function getCustomer(e) {
         e.preventDefault()
-        fetch(`http://localhost:9292/customers/${customer.id}`)
-            .then((resp) => resp.json())
-            .then((receivedCustomer) => setCustomer({
-                ...customer,
-                salesperson_id: receivedCustomer.salesperson_id,
-                customer_first_name: receivedCustomer.customer_first_name,
-                customer_last_name: receivedCustomer.customer_last_name,
-                units_sold: receivedCustomer.units_sold,
-                revenue: receivedCustomer.revenue,
-                salesperson: {...receivedCustomer.salesperson}
-            }))
+        // fetch(`http://localhost:9292/customers/${customer.id}`)
+        //     .then((resp) => resp.json())
+        //     .then((receivedCustomer) => setCustomer({
+        //         ...customer,
+        //         salesperson_id: receivedCustomer.salesperson_id,
+        //         customer_first_name: receivedCustomer.customer_first_name,
+        //         customer_last_name: receivedCustomer.customer_last_name,
+        //         units_sold: receivedCustomer.units_sold,
+        //         revenue: receivedCustomer.revenue,
+        //         salesperson: {...receivedCustomer.salesperson}
+        //     }))
+
         setDisplayForm(!displayForm)
     }
 

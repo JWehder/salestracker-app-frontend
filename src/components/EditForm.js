@@ -7,16 +7,16 @@ import { CustomerContext } from "../context/customerContext";
 import { SalesContext } from "../context/salesContext";
 
 function EditForm() {
-    const { salespeopleOptions } = useContext(SalesContext)
+    const { salespeopleOptions, salespersonId, setSalespersonId } = useContext(SalesContext)
     const { displayForm, getCustomer, customer, handleInputChange, editCustomer, getSalespersonForCustomer } = useContext(CustomerContext)
 
     return (
         <div>
             <div>
                 <Form onSubmit={getCustomer}>
-                    <Form.Label>Please enter Customer Number#</Form.Label>
+                    <Form.Label>Who is the salesperson?</Form.Label>
                         <Form.Group className="mb-3">
-                        <Form.Control name={'id'} value= {customer.id} onChange= {handleInputChange} placeholder="1234" />
+                        <Form.Control name={'id'} value= {salespersonId} onChange= {(e) => setSalespersonId(e.target.value)} placeholder="salesperson " />
                     </Form.Group>
                     <Button variant= "primary" type="submit" className="mb-2">
                         Submit

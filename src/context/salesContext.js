@@ -7,8 +7,9 @@ const SalesContext = createContext();
 function SalesProvider( { children }) {
     // delete customers and the get request
     // run a function that maps customers to an array for currentCustomers placed at the start
-    const { customers } = useContext(CustomerContext)
+    // const { customers } = useContext(CustomerContext)
     // setCurrentCustomers
+    const [salespersonId, setSalespersonId] = useState(0)
     const [salespeople, setSalespeople] = useState([])
     const [currentSalesperson, setCurrentSalesperson] = useState({
         first_name: "",
@@ -98,7 +99,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson, salespersonId, setSalespersonId, setCurrentCustomers }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }
