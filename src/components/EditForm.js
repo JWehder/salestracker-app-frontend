@@ -5,17 +5,25 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { CustomerContext } from "../context/customerContext";
 import { SalesContext } from "../context/salesContext";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function EditForm() {
-    const { salespeopleOptions, salespersonId, setSalespersonId } = useContext(SalesContext)
+    const { salespeopleOptions, salespersonId, setSalespersonId, salespeopleDropdownItems, getSalesperson } = useContext(SalesContext)
     const { displayForm, getCustomer, customer, handleInputChange, editCustomer, getSalespersonForCustomer } = useContext(CustomerContext)
 
     return (
         <div>
             <div>
                 <Form onSubmit={getCustomer}>
-                    <Form.Label>Who is the salesperson?</Form.Label>
                         <Form.Group className="mb-3">
+                        <DropdownButton defaultValue="All" id="dropdown-item-button" title="Select Salesperson">
+                            <Dropdown.ItemText>Display a Saleperson's Customers</Dropdown.ItemText>
+                            <Dropdown.Divider></Dropdown.Divider>
+                            <Dropdown.Item onClick={(e) => getSalesperson(e.target.value)} as="button" value="All">All</Dropdown.Item>
+                            {salespeopleDropdownItems}
+                        </DropdownButton>
+                        <Form.Label>Please Enter Customer # below:</Form.Label>
                         <Form.Control name={'id'} value= {salespersonId} onChange= {(e) => setSalespersonId(e.target.value)} placeholder="salesperson " />
                     </Form.Group>
                     <Button variant= "primary" type="submit" className="mb-2">

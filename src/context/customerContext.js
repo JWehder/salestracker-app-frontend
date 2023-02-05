@@ -7,9 +7,9 @@ const CustomerContext = createContext();
 function CustomerProvider( { children } ) {
     const { salespeople, setSalespeople, currentCustomers } = useContext(SalesContext)
     const [displayForm, setDisplayForm] = useState(false)
-    // const [customers, setCustomers] = useState([])
-    // const [currentCustomers, setCurrentCustomers] = useState([])
-    const [customer, setCustomer] = useState({
+    const [customer, setCustomer] = useState({})
+
+    const defaultForm = {
         salesperson_id: 0,
         id: 0,
         customer_first_name: "",
@@ -17,7 +17,7 @@ function CustomerProvider( { children } ) {
         units_sold: 0,
         revenue: 0,
         salesperson: {}
-    })
+    }
 
     // const rev_total = currentCustomers.reduce((accumulator, customer) => {
     //    return accumulator += customer.revenue
@@ -67,15 +67,7 @@ function CustomerProvider( { children } ) {
             .then((resp) => resp.json())
             .then((salesperson) => {
                 setSalespeople([...salespeople, salesperson])
-                setCustomer({        
-                    salesperson_id: 0,
-                    id: 0,
-                    customer_first_name: "",
-                    customer_last_name: "",
-                    units_sold: 0,
-                    revenue: 0,
-                    salesperson: {}
-                })
+                setCustomer({...defaultForm})
                 // setCustomers([...customers, customer])
                 // setCurrentCustomers([...currentCustomers, customer])
             })
@@ -85,7 +77,7 @@ function CustomerProvider( { children } ) {
         e.preventDefault()
         const editedCustomer = {
             id: customer.id,
-            salesperson_id: customer.salesperson.id,
+            salesperson_id: customer.salesperson_id,
             customer_first_name: customer.customer_first_name,
             customer_last_name: customer.customer_last_name,
             units_sold: customer.units_sold,
@@ -131,13 +123,15 @@ function CustomerProvider( { children } ) {
         })
     }
 
-    //const displayCustomers = currentCustomers.map((customer) => {
-    //    return <CustomerRow customer= {customer} key={customer.id}/>
-    //})
+    // iterate through each salesperson, grabbing each customer, creating an object meeting your specifications for making a row, and then utilize that row to map customers to the row.
+
+    const displayCustomers = currentCustomers.map((customer) => {
+        return <CustomerRow customer= {customer} key={customer.id}/>
+    })
 
     // displayCustomers, customers, setCustomers, rev_total, currentCustomers, setCurrentCustomers
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, getCustomer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, getCustomer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, displayCustomers }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }

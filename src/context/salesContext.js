@@ -11,14 +11,16 @@ function SalesProvider( { children }) {
     // setCurrentCustomers
     const [salespersonId, setSalespersonId] = useState(0)
     const [salespeople, setSalespeople] = useState([])
-    const [currentSalesperson, setCurrentSalesperson] = useState({
+    const [currentSalesperson, setCurrentSalesperson] = useState({})
+    const [selectedSalesperson, setSelectedSalesperson] = useState("All")
+    const [currentCustomers, setCurrentCustomers] = useState([])
+
+    const defaultForm = {
         first_name: "",
         last_name: "",
         quota: 0,
         customers: []
-    })
-    const [selectedSalesperson, setSelectedSalesperson] = useState("All")
-    const [currentCustomers, setCurrentCustomers] = useState([])
+    }
 
     const quota_total = salespeople.reduce((accumulator, salesperson) => {
         if (currentSalesperson.quota === 0) {
@@ -30,12 +32,28 @@ function SalesProvider( { children }) {
 
     function getSalesperson(value) {
         if (value === "All") {
-            const allCustomers = salespeople.map((salesperson) => salesperson.customers)
-            setCurrentCustomers(allCustomers)
+            getCustomers(salespeople)
         } else {
             const salesperson = salespeople.find((salesperson) => salesperson.id === parseInt(value))
             setCurrentCustomers(salesperson.customers)
         }
+    }
+
+    function getCustomers(salespeople) {
+        let allCustomers = []
+        salespeople.forEach((salesperson) => {
+            if (salesperson.customers.length > 0) {
+                salesperson.customers.forEach((customer) => {
+                    customer = {
+                        ...customer, 
+                        salesperson_first_name: salesperson.first_name, 
+                        salesperson_last_name: salesperson.last_name
+                    }
+                    allCustomers = [...allCustomers, customer]
+                })
+            }
+        })
+        setCurrentCustomers(allCustomers)
     }
 
     useEffect(() => {
@@ -43,15 +61,7 @@ function SalesProvider( { children }) {
             .then((resp) => resp.json())
             .then((salespeople) => {
                 setSalespeople(salespeople)
-                let allCustomers = []
-                salespeople.forEach((salesperson) => {
-                    if (salesperson.customers.length > 0) {
-                        salesperson.customers.forEach((customer) => {
-                            allCustomers = [...allCustomers, customer]
-                        })
-                    }
-                })
-                setCurrentCustomers(allCustomers)
+                getCustomers(salespeople)
             })
     }, [])
 
@@ -75,12 +85,7 @@ function SalesProvider( { children }) {
                 ...salespeople,
                 salesperson
             ]))
-        setCurrentSalesperson({
-            first_name: "",
-            last_name: "",
-            quota: 0,
-            customers: [] 
-            })
+        setCurrentSalesperson({...defaultForm})
     }
 
     function handleInputChange(e) {
@@ -99,7 +104,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson, salespersonId, setSalespersonId, setCurrentCustomers }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson, salespersonId, setSalespersonId, setCurrentCustomers, currentCustomers }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }
