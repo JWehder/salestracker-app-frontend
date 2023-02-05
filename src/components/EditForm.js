@@ -5,41 +5,15 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { CustomerContext } from "../context/customerContext";
 import { SalesContext } from "../context/salesContext";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import FindCustomerForm from "./FindCustomerForm";
 
 function EditForm() {
-    const { salespeopleOptions, salespersonId, setSalespersonId, salespeopleDropdownItems, getSalesperson } = useContext(SalesContext)
-    const { displayForm, getCustomer, customer, handleInputChange, editCustomer, getSalespersonForCustomer } = useContext(CustomerContext)
+    const { salespeopleOptions } = useContext(SalesContext)
+    const { displayForm, customer, handleInputChange, editCustomer, getSalespersonForCustomer } = useContext(CustomerContext)
 
     return (
         <div>
-            <div>
-                <Form onSubmit={getCustomer}>
-                    <Row className="mb-3">
-                        <Form.Group as={Col}>
-                            <Form.Label>Salesperson</Form.Label>
-                            <Form.Select 
-                            name="salesperson_id"
-                            defaultValue={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
-                            value={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
-                            onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
-                            >
-                        
-                                <option>Choose...</option>
-                                {salespeopleOptions}
-                            </Form.Select>
-                        </Form.Group>
-                        <Form.Group as={Col}>
-                            <Form.Label>Please Enter Customer # below:</Form.Label>
-                            <Form.Control name={'id'} value= {salespersonId} onChange= {(e) => setSalespersonId(e.target.value)} placeholder="salesperson " />
-                        </Form.Group>
-                    </Row>
-                    <Button variant= "primary" type="submit" className="mb-2">
-                        Submit
-                    </Button>
-                </Form>
-            </div>
+            <FindCustomerForm />
             {
                 displayForm ?
             <Form onSubmit={editCustomer}>
@@ -105,7 +79,7 @@ function EditForm() {
             </Row>
 
                 <Button variant= "primary" type="submit" className="mb-2">
-                        Submit Customer
+                        Search
                 </Button>
             </Form>
             :

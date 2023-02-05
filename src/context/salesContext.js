@@ -9,18 +9,19 @@ function SalesProvider( { children }) {
     // run a function that maps customers to an array for currentCustomers placed at the start
     // const { customers } = useContext(CustomerContext)
     // setCurrentCustomers
-    const [salespersonId, setSalespersonId] = useState(0)
-    const [salespeople, setSalespeople] = useState([])
-    const [currentSalesperson, setCurrentSalesperson] = useState({})
-    const [selectedSalesperson, setSelectedSalesperson] = useState("All")
-    const [currentCustomers, setCurrentCustomers] = useState([])
-
     const defaultForm = {
         first_name: "",
         last_name: "",
         quota: 0,
         customers: []
     }
+
+    const [salespersonId, setSalespersonId] = useState(0)
+    const [salespeople, setSalespeople] = useState([])
+    const [currentSalesperson, setCurrentSalesperson] = useState({...defaultForm})
+    const [selectedSalesperson, setSelectedSalesperson] = useState("All")
+    const [currentCustomers, setCurrentCustomers] = useState([])
+
 
     const quota_total = salespeople.reduce((accumulator, salesperson) => {
         if (currentSalesperson.quota === 0) {

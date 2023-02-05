@@ -90,10 +90,7 @@ function CustomerProvider( { children } ) {
             .then((resp) => resp.json())
             .then((salesperson) => {
                 setSalespeople([...salespeople, salesperson])
-                // setCustomers(customers)
-                // setCurrentCustomers(customers)
             })
-
     }
 
     function getCustomer(e) {
