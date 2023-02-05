@@ -30,12 +30,20 @@ function SalesProvider( { children }) {
         }
     }, 0)
 
-    function getSalesperson(value) {
+    function getCustomersForSalesperson(value) {
         if (value === "All") {
             getCustomers(salespeople)
         } else {
             const salesperson = salespeople.find((salesperson) => salesperson.id === parseInt(value))
-            setCurrentCustomers(salesperson.customers)
+            const customers = salesperson.customers.map((customer) => {
+                customer = {
+                    ...customer, 
+                    salesperson_first_name: salesperson.first_name,
+                    salesperson_last_name: salesperson.last_name
+                }
+                return customer
+            })
+            setCurrentCustomers(customers)
         }
     }
 
@@ -100,11 +108,11 @@ function SalesProvider( { children }) {
     })
 
     const salespeopleDropdownItems = salespeople.map((salesperson) => {
-        return <Dropdown.Item onClick={() => getSalesperson(salesperson.id)} key= {salesperson.first_name} as="button" value={`${salesperson.id} - ${salesperson.first_name} ${salesperson.last_name}`}>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</Dropdown.Item>
+        return <Dropdown.Item onClick={() => getCustomersForSalesperson(salesperson.id)} key= {salesperson.id} as="button" value={`${salesperson.id} - ${salesperson.first_name} ${salesperson.last_name}`}>{salesperson.id} - {salesperson.first_name} {salesperson.last_name}</Dropdown.Item>
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson, salespersonId, setSalespersonId, setCurrentCustomers, currentCustomers }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getCustomersForSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson, salespersonId, setSalespersonId, setCurrentCustomers, currentCustomers }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }

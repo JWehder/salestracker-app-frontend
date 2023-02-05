@@ -7,7 +7,9 @@ import { SalesContext } from "../context/salesContext";
 
 function CustomerTable() {
   const { displayCustomers } = useContext(CustomerContext)
-  const { salespeopleDropdownItems, getSalesperson, salespersonDropdown, setSalespersonDropdownValue } = useContext(SalesContext)
+  const { salespeopleDropdownItems, getCustomersForSalesperson, salespersonDropdown, setSalespersonDropdownValue } = useContext(SalesContext)
+
+  // I need the dropdown items to be customizable, so that I can go in and change each to work with different functions when clicked. Once customizable, I would like to find the salesperson, iterate through their customers and find return the correct customer
 
     return (
         <>
@@ -15,7 +17,7 @@ function CustomerTable() {
         <DropdownButton defaultValue="All" id="dropdown-item-button" title="Select Salesperson">
           <Dropdown.ItemText>Display a Saleperson's Customers</Dropdown.ItemText>
           <Dropdown.Divider></Dropdown.Divider>
-          <Dropdown.Item onClick={(e) => getSalesperson(e.target.value)} as="button" value="All">All</Dropdown.Item>
+          <Dropdown.Item onClick={(e) => getCustomersForSalesperson(e.target.value)} as="button" value="All">All</Dropdown.Item>
           {salespeopleDropdownItems}
         </DropdownButton>
         <hr></hr>

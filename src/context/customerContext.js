@@ -5,10 +5,6 @@ import { SalesContext } from './salesContext';
 const CustomerContext = createContext();
 
 function CustomerProvider( { children } ) {
-    const { salespeople, setSalespeople, currentCustomers } = useContext(SalesContext)
-    const [displayForm, setDisplayForm] = useState(false)
-    const [customer, setCustomer] = useState({})
-
     const defaultForm = {
         salesperson_id: 0,
         id: 0,
@@ -18,6 +14,11 @@ function CustomerProvider( { children } ) {
         revenue: 0,
         salesperson: {}
     }
+    const { salespeople, setSalespeople, currentCustomers } = useContext(SalesContext)
+    const [displayForm, setDisplayForm] = useState(false)
+    const [customer, setCustomer] = useState({...defaultForm})
+
+
 
     // const rev_total = currentCustomers.reduce((accumulator, customer) => {
     //    return accumulator += customer.revenue
@@ -42,8 +43,6 @@ function CustomerProvider( { children } ) {
         })
             .then((resp) => resp.json())
             .then((salesperson) => {
-                // setCustomers(customers)
-                // setCurrentCustomers(customers)
                 setSalespeople([...salespeople, salesperson])
             })
     }
@@ -68,8 +67,6 @@ function CustomerProvider( { children } ) {
             .then((salesperson) => {
                 setSalespeople([...salespeople, salesperson])
                 setCustomer({...defaultForm})
-                // setCustomers([...customers, customer])
-                // setCurrentCustomers([...currentCustomers, customer])
             })
     }
 
@@ -122,8 +119,6 @@ function CustomerProvider( { children } ) {
             [e.target.name]: e.target.value
         })
     }
-
-    // iterate through each salesperson, grabbing each customer, creating an object meeting your specifications for making a row, and then utilize that row to map customers to the row.
 
     const displayCustomers = currentCustomers.map((customer) => {
         return <CustomerRow customer= {customer} key={customer.id}/>

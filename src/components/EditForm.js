@@ -16,16 +16,25 @@ function EditForm() {
         <div>
             <div>
                 <Form onSubmit={getCustomer}>
-                        <Form.Group className="mb-3">
-                        <DropdownButton defaultValue="All" id="dropdown-item-button" title="Select Salesperson">
-                            <Dropdown.ItemText>Display a Saleperson's Customers</Dropdown.ItemText>
-                            <Dropdown.Divider></Dropdown.Divider>
-                            <Dropdown.Item onClick={(e) => getSalesperson(e.target.value)} as="button" value="All">All</Dropdown.Item>
-                            {salespeopleDropdownItems}
-                        </DropdownButton>
-                        <Form.Label>Please Enter Customer # below:</Form.Label>
-                        <Form.Control name={'id'} value= {salespersonId} onChange= {(e) => setSalespersonId(e.target.value)} placeholder="salesperson " />
-                    </Form.Group>
+                    <Row className="mb-3">
+                        <Form.Group as={Col}>
+                            <Form.Label>Salesperson</Form.Label>
+                            <Form.Select 
+                            name="salesperson_id"
+                            defaultValue={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
+                            value={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
+                            onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
+                            >
+                        
+                                <option>Choose...</option>
+                                {salespeopleOptions}
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label>Please Enter Customer # below:</Form.Label>
+                            <Form.Control name={'id'} value= {salespersonId} onChange= {(e) => setSalespersonId(e.target.value)} placeholder="salesperson " />
+                        </Form.Group>
+                    </Row>
                     <Button variant= "primary" type="submit" className="mb-2">
                         Submit
                     </Button>
@@ -34,15 +43,14 @@ function EditForm() {
             {
                 displayForm ?
             <Form onSubmit={editCustomer}>
-                <Row className="mb-3" onSubmit={editCustomer}>
-                    <Form.Group as={Col} controlId="formGridState">
+                <Row className="mb-3">
+                    <Form.Group as={Col}>
                     <Form.Label>Salesperson</Form.Label>
                     <Form.Select 
                     name="salesperson_id"
                     defaultValue={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
                     value={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
                     onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
-
                     >
                         <option>Choose...</option>
                         {salespeopleOptions}
