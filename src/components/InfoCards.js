@@ -37,9 +37,9 @@ function InfoCard() {
                 >
                     <Card.Header as={"h5"}>Quota vs. Revenue</Card.Header>
                     <Card.Body>
-                        <Card.Title as={"h8"}> Revenue: ${rev_total} <br></br></Card.Title>
+                        <Card.Title as={"h6"}> Revenue: ${rev_total} <br></br></Card.Title>
                         
-                        <Card.Title as={"h8"}> Quota: ${quota_total} </Card.Title>
+                        <Card.Title as={"h6"}> Quota: ${quota_total} </Card.Title>
                         <hr></hr>
                         <Card.Text>
                         {textData()}

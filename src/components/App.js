@@ -13,8 +13,8 @@ import { SalesContext } from "../context/salesContext";
 
 
 function App() {
-  const { setCustomer } = useContext(CustomerContext)
-  const { setCurrentSalesperson } = useContext(SalesContext)
+  const { setCustomer, defaultCustomerForm } = useContext(CustomerContext)
+  const { setCurrentSalesperson, defaultForm } = useContext(SalesContext)
 
   const [changeButton, setChangeButton] = useState(false)
   const [displayedForm, setDisplayedForm] = useState("Make Changes")
@@ -27,21 +27,8 @@ function App() {
   function handleCloseButtonClick() {
     setChangeButton(!changeButton)
     setDisplayedForm("Make Changes")
-    setCustomer({
-      salesperson_id: 0,
-      id: 0,
-      customer_first_name: "",
-      customer_last_name: "",
-      units_sold: 0,
-      revenue: 0,
-      salesperson: {}
-      })
-    setCurrentSalesperson({
-      first_name: "",
-      last_name: "",
-      quota: 0,
-      customers: []
-    })
+    setCustomer({...defaultCustomerForm})
+    setCurrentSalesperson({...defaultForm})
   } 
 
   return (

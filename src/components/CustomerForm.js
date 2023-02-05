@@ -18,7 +18,7 @@ function CustomerForm() {
                 <Form.Select 
                 defaultValue="Choose..."
                 name="salesperson_id"
-                value={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
+                value={`${customer.salesperson_id} - ${customer.salesperson_first_name} ${customer.salesperson_last_name}`}
                 onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
                 >
                     <option>Choose...</option>

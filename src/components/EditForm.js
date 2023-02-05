@@ -22,8 +22,7 @@ function EditForm() {
                     <Form.Label>Salesperson</Form.Label>
                     <Form.Select 
                     name="salesperson_id"
-                    defaultValue={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
-                    value={`${customer.salesperson.id} - ${customer.salesperson.first_name} ${customer.salesperson.last_name}`}
+                    value={`${customer.salesperson.id} - ${customer.salesperson_first_name} ${customer.salesperson_last_name}`}
                     onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
                     >
                         <option>Choose...</option>
@@ -33,7 +32,7 @@ function EditForm() {
                 </Row>
                 <Row className="mb-3">
                     <Form.Label>Customer First & Last Name</Form.Label>
-                    <Form.Group as={Col} className="mb-3" controlId="formGridAddress1">
+                    <Form.Group as={Col} className="mb-3">
                     <Form.Control 
                     placeholder="First Name" 
                     type="text"

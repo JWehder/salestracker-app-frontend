@@ -5,18 +5,19 @@ import { SalesContext } from './salesContext';
 const CustomerContext = createContext();
 
 function CustomerProvider( { children } ) {
-    const defaultForm = {
+    const defaultCustomerForm = {
         salesperson_id: 0,
         id: 0,
         customer_first_name: "",
         customer_last_name: "",
         units_sold: 0,
         revenue: 0,
-        salesperson: {}
+        salesperson_first_name: "",
+        salesperson_last_name: ""
     }
     const { salespeople, setSalespeople, currentCustomers } = useContext(SalesContext)
     const [displayForm, setDisplayForm] = useState(false)
-    const [customer, setCustomer] = useState({...defaultForm})
+    const [customer, setCustomer] = useState({...defaultCustomerForm})
 
 
 
@@ -24,11 +25,13 @@ function CustomerProvider( { children } ) {
     //    return accumulator += customer.revenue
     // }, 0)
 
-    function getSalespersonForCustomer(id) {
-        // const customer = customers.find((customer) => customer.salesperson_id === id)
+    function getSalespersonForCustomer(customerNumber, salespersonId) {
+        const salesperson = salespeople.find((salesperson) => salesperson.id === salespersonId)
+        const customer = salesperson.customers.find((customer) => customer.id === customerNumber)
         setCustomer({
             ...customer,
-            salesperson: {...customer.salesperson}
+            salesperson_first_name: salesperson.first_name,
+            salesperson_last_name: salesperson.last_name
         })
     }
 
@@ -50,7 +53,7 @@ function CustomerProvider( { children } ) {
     function createCustomer(e) {
         e.preventDefault()
         const newCustomer = {
-            salesperson_id: customer.salesperson.id,
+            salesperson_id: customer.salesperson_id,
             customer_first_name: customer.customer_first_name,
             customer_last_name: customer.customer_last_name,
             units_sold: customer.units_sold,
@@ -66,7 +69,7 @@ function CustomerProvider( { children } ) {
             .then((resp) => resp.json())
             .then((salesperson) => {
                 setSalespeople([...salespeople, salesperson])
-                setCustomer({...defaultForm})
+                setCustomer({...defaultCustomerForm})
             })
     }
 
@@ -123,7 +126,7 @@ function CustomerProvider( { children } ) {
 
     // displayCustomers, customers, setCustomers, rev_total, currentCustomers, setCurrentCustomers
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, getCustomer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, displayCustomers }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, getCustomer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, displayCustomers, defaultCustomerForm }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }
