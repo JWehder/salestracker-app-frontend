@@ -48,6 +48,18 @@ function CustomerProvider( { children } ) {
         setCustomer({...defaultCustomerForm})
     }
 
+    function addEditedCustomer(salespersonId, salespersonsCustomers) {
+        let salesperson = salespeople.find((salesperson) => salesperson.id === salespersonId)
+        salesperson = {...salesperson, customers: [...salespersonsCustomers]}
+        const filteredSalespeople = salespeople.filter((salesperson) => salesperson.id !== customer.salesperson_id)
+        const newSalespeople = [...filteredSalespeople, salesperson]
+        const filteredCurrentCustomers = currentCustomers.filter((cust) => cust.id !== customer.id)
+        const newCurrentCustomers = [...filteredCurrentCustomers, customer]
+        setCurrentCustomers(newCurrentCustomers)
+        setSalespeople(newSalespeople)
+        setCustomer({...defaultCustomerForm})
+    }
+
     function deleteCustomer(e) {
         e.preventDefault()
         fetch(`http://localhost:9292/customers/${customer.id}`, {
@@ -101,9 +113,7 @@ function CustomerProvider( { children } ) {
             body: JSON.stringify(editedCustomer),
         })
             .then((resp) => resp.json())
-            .then((salespersonsCustomers) => {
-                
-            })
+            .then((salespersonsCustomers) => addEditedCustomer(editedCustomer.salesperson_id, salespersonsCustomers))
     }
 
     function getCustomer(e) {
