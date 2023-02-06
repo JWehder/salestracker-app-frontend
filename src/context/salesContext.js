@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { CustomerContext } from './customerContext';
+import CustomerRow from '../components/CustomerRow';
 
 const SalesContext = createContext();
 
@@ -44,7 +44,7 @@ function SalesProvider( { children }) {
         }
     }
 
-    function getCustomers(salespeople) {
+    const getCustomers = (salespeople) => {
         let allCustomers = []
         salespeople.forEach((salesperson) => {
             if (salesperson.customers.length > 0) {
@@ -86,11 +86,13 @@ function SalesProvider( { children }) {
             body: JSON.stringify(newSalesperson),
         })
             .then((resp) => resp.json())
-            .then((salesperson) => setSalespeople([
+            .then((salesperson) => {
+                setSalespeople([
                 ...salespeople,
                 salesperson
-            ]))
-        setCurrentSalesperson({...defaultForm})
+            ])
+            })
+            setCurrentSalesperson({...defaultForm})
     }
 
     function handleInputChange(e) {
@@ -109,7 +111,7 @@ function SalesProvider( { children }) {
     })
 
 
-    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getCustomersForSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson, salespersonId, setSalespersonId, setCurrentCustomers, currentCustomers, defaultForm }}>{children}</SalesContext.Provider>
+    return <SalesContext.Provider value={{ currentSalesperson, salespeopleDropdownItems, salespeople, salespeopleOptions, handleInputChange, getCustomersForSalesperson, createSalesperson, quota_total, selectedSalesperson, setSelectedSalesperson, setCurrentSalesperson, salespersonId, setSalespersonId, setCurrentCustomers, currentCustomers, defaultForm, setSalespeople, getCustomers }}>{children}</SalesContext.Provider>
 }
 
 export { SalesProvider, SalesContext }

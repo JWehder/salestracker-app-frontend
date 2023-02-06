@@ -8,18 +8,17 @@ import { CustomerContext } from "../context/customerContext";
 
 function CustomerForm() {
     const { salespeopleOptions } = useContext(SalesContext)
-    const { customer, handleInputChange, createCustomer, getSalespersonForCustomer } = useContext(CustomerContext)
+    const { customer, handleInputChange, createCustomer } = useContext(CustomerContext)
 
     return (
         <Form onSubmit={createCustomer}>
             <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGridState">
+                <Form.Group as={Col}>
                 <Form.Label>Salesperson</Form.Label>
                 <Form.Select 
-                defaultValue="Choose..."
                 name="salesperson_id"
                 value={`${customer.salesperson_id} - ${customer.salesperson_first_name} ${customer.salesperson_last_name}`}
-                onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
+                onChange={handleInputChange}
                 >
                     <option>Choose...</option>
                     {salespeopleOptions}

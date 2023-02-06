@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import CustomerRow from '../components/CustomerRow';
+import React, { createContext, useState, useContext } from 'react';
 import { SalesContext } from './salesContext';
+import CustomerRow from '../components/CustomerRow';
 
 const CustomerContext = createContext();
 
@@ -15,11 +15,9 @@ function CustomerProvider( { children } ) {
         salesperson_first_name: "",
         salesperson_last_name: ""
     }
-    const { salespeople, setSalespeople, currentCustomers } = useContext(SalesContext)
+    const { salespeople, setSalespeople, currentCustomers, setCurrentCustomers } = useContext(SalesContext)
     const [displayForm, setDisplayForm] = useState(false)
     const [customer, setCustomer] = useState({...defaultCustomerForm})
-
-
 
     // const rev_total = currentCustomers.reduce((accumulator, customer) => {
     //    return accumulator += customer.revenue
@@ -27,12 +25,27 @@ function CustomerProvider( { children } ) {
 
     function getSalespersonForCustomer(customerNumber, salespersonId) {
         const salesperson = salespeople.find((salesperson) => salesperson.id === salespersonId)
-        const customer = salesperson.customers.find((customer) => customer.id === customerNumber)
+        const foundCustomer = salesperson.customers.find((cust) => cust.id == customerNumber)
         setCustomer({
-            ...customer,
+            ...foundCustomer,
             salesperson_first_name: salesperson.first_name,
             salesperson_last_name: salesperson.last_name
         })
+        setDisplayForm(!displayForm)
+    }
+
+    function addCustomer(newCustomer) {
+        let salesperson = salespeople.find((salesperson) => salesperson.id === newCustomer.salesperson_id)
+        salesperson = {...salesperson, customers: [...salesperson.customers, newCustomer]}
+        const filteredSalespeople = salespeople.filter((salesperson) => salesperson.id !== customer.salesperson_id)
+        const newSalespeople = [...filteredSalespeople, salesperson]
+        const formattedNewCustomer = {
+            ...newCustomer, 
+            salesperson_first_name:salesperson.first_name, salesperson_last_name: salesperson.last_name
+        }
+        setSalespeople(newSalespeople)
+        setCurrentCustomers([...currentCustomers, formattedNewCustomer])
+        setCustomer({...defaultCustomerForm})
     }
 
     function deleteCustomer(e) {
@@ -67,10 +80,7 @@ function CustomerProvider( { children } ) {
             body: JSON.stringify(newCustomer),
         })
             .then((resp) => resp.json())
-            .then((salesperson) => {
-                setSalespeople([...salespeople, salesperson])
-                setCustomer({...defaultCustomerForm})
-            })
+            .then(addCustomer)
     }
 
     function editCustomer(e) {
@@ -91,8 +101,8 @@ function CustomerProvider( { children } ) {
             body: JSON.stringify(editedCustomer),
         })
             .then((resp) => resp.json())
-            .then((salesperson) => {
-                setSalespeople([...salespeople, salesperson])
+            .then((salespersonsCustomers) => {
+                
             })
     }
 
@@ -114,10 +124,20 @@ function CustomerProvider( { children } ) {
     }
 
     function handleInputChange(e) {
-        setCustomer({
-            ...customer,
-            [e.target.name]: e.target.value
-        })
+        if (e.target.name === "salesperson_id") {
+            const salesperson = salespeople.find((salesperson) => salesperson.id == parseInt(e.target.value))
+            setCustomer({
+                ...customer,
+                [e.target.name]: salesperson.id,
+                salesperson_first_name: salesperson.first_name,
+                salesperson_last_name: salesperson.last_name
+            })
+        } else {
+            setCustomer({
+                ...customer,
+                [e.target.name]: e.target.value
+            })
+        }
     }
 
     const displayCustomers = currentCustomers.map((customer) => {
@@ -126,7 +146,7 @@ function CustomerProvider( { children } ) {
 
     // displayCustomers, customers, setCustomers, rev_total, currentCustomers, setCurrentCustomers
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, getCustomer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, displayCustomers, defaultCustomerForm }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, getCustomer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, defaultCustomerForm, displayCustomers }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }

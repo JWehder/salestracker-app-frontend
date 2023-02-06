@@ -3,12 +3,12 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import { CustomerContext } from "../context/customerContext";
 import { SalesContext } from "../context/salesContext";
+import { CustomerContext } from "../context/customerContext";
 
 function FindCustomerForm() {
-    const { customer } = useContext(CustomerContext)
-    const { salespeopleOptions, getSalespersonForCustomer } = useContext(SalesContext)
+    const { salespeopleOptions, salespeople } = useContext(SalesContext)
+    const { getSalespersonForCustomer } = useContext(CustomerContext)
 
     const [salespersonDisplayed, setSalespersonDisplayed] = useState({
         salespersonId: 0,
@@ -17,23 +17,29 @@ function FindCustomerForm() {
     })
     const [customerNumber, setCustomerNumber] = useState(0)
 
-    // handle the select event 
-
     function handleSelect(id) {
-        salespeople
+        const salesperson = salespeople.find((salesperson) => salesperson.id === id)
+        setSalespersonDisplayed({
+            id: salesperson.id,
+            firstName: salesperson.first_name,
+            lastName: salesperson.last_name
+        })
     }
 
     return(
         <div>
-            <Form onSubmit={() => getSalespersonForCustomer(customerNumber, salespersonDisplayed)}>
+            <Form onSubmit={(e) => {
+                e.preventDefault()
+                getSalespersonForCustomer(customerNumber, salespersonDisplayed.id)
+                }}>
                 <Form.Label>Search for a customer below</Form.Label>
                 <Row className="mb-3">
                     <Form.Group as={Col}>
                         <Form.Label>Salesperson</Form.Label>
                         <Form.Select 
                         name="salesperson_id"
-                        value={`${customer.salesperson_id} - ${customer.salesperson_first_name} ${customer.salesperson_last_name}`}
-                        onChange={(e) => setSalespersonId(parseInt(e.target.value))}
+                        value={`${salespersonDisplayed.id} - ${salespersonDisplayed.firstName} ${salespersonDisplayed.lastName}`}
+                        onChange={(e) => handleSelect(parseInt(e.target.value))}
                         >
                             <option>Choose...</option>
                             {salespeopleOptions}
@@ -41,7 +47,7 @@ function FindCustomerForm() {
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Please Enter Customer # below:</Form.Label>
-                        <Form.Control name={'id'} value= {customerNumber} onChange= {(e) => setCustomerNumber(e.target.value)} placeholder="salesperson " />
+                        <Form.Control name={'id'} value= {customerNumber} onChange= {(e) => setCustomerNumber(e.target.value)} placeholder="Customer number" />
                     </Form.Group>
                 </Row>
                 <Button variant= "primary" type="submit" className="mb-2">

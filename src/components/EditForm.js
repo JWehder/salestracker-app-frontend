@@ -9,7 +9,7 @@ import FindCustomerForm from "./FindCustomerForm";
 
 function EditForm() {
     const { salespeopleOptions } = useContext(SalesContext)
-    const { displayForm, customer, handleInputChange, editCustomer, getSalespersonForCustomer } = useContext(CustomerContext)
+    const { displayForm, customer, handleInputChange, editCustomer } = useContext(CustomerContext)
 
     return (
         <div>
@@ -22,8 +22,8 @@ function EditForm() {
                     <Form.Label>Salesperson</Form.Label>
                     <Form.Select 
                     name="salesperson_id"
-                    value={`${customer.salesperson.id} - ${customer.salesperson_first_name} ${customer.salesperson_last_name}`}
-                    onChange={(e) => getSalespersonForCustomer(parseInt(e.target.value))}
+                    value={`${customer.salesperson_id} - ${customer.salesperson_first_name} ${customer.salesperson_last_name}`}
+                    onChange={(e) => handleInputChange(parseInt(e.target.value))}
                     >
                         <option>Choose...</option>
                         {salespeopleOptions}

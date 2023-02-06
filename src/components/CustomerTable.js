@@ -7,7 +7,7 @@ import { SalesContext } from "../context/salesContext";
 
 function CustomerTable() {
   const { displayCustomers } = useContext(CustomerContext)
-  const { salespeopleDropdownItems, getCustomersForSalesperson, salespersonDropdown, setSalespersonDropdownValue } = useContext(SalesContext)
+  const { salespeopleDropdownItems, getCustomersForSalesperson } = useContext(SalesContext)
 
   // I need the dropdown items to be customizable, so that I can go in and change each to work with different functions when clicked. Once customizable, I would like to find the salesperson, iterate through their customers and find return the correct customer
 
