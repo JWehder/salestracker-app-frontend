@@ -60,6 +60,17 @@ function CustomerProvider( { children } ) {
         setCustomer({...defaultCustomerForm})
     }
 
+    function removeDeletedCustomer(nonDeletedCustomers) {
+        let salesperson = salespeople.find((salesperson) => salesperson.id === nonDeletedCustomers[0].salesperson_id)
+        salesperson = {...salesperson, customers: [...nonDeletedCustomers]}
+        const filteredSalespeople = salespeople.filter((salesperson) => salesperson.id !== nonDeletedCustomers[0].salesperson_id)
+        const newSalespeople = [...filteredSalespeople, salesperson]
+        const filteredCurrentCustomers = currentCustomers.filter((cust) => cust.id != customer.id)
+        setSalespeople(newSalespeople)
+        setCurrentCustomers(filteredCurrentCustomers)
+        setCustomer({...defaultCustomerForm})
+    }
+
     function deleteCustomer(e) {
         e.preventDefault()
         fetch(`http://localhost:9292/customers/${customer.id}`, {
@@ -70,9 +81,7 @@ function CustomerProvider( { children } ) {
             body: JSON.stringify(customer.id)
         })
             .then((resp) => resp.json())
-            .then((salesperson) => {
-                setSalespeople([...salespeople, salesperson])
-            })
+            .then(removeDeletedCustomer)
     }
 
     function createCustomer(e) {
