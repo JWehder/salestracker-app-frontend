@@ -41,6 +41,7 @@ function SalesProvider( { children }) {
                 return customer
             })
             setCurrentCustomers(customers)
+            
         }
     }
 

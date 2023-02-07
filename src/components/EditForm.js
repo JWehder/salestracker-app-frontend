@@ -78,7 +78,7 @@ function EditForm() {
             </Row>
 
                 <Button variant= "primary" type="submit" className="mb-2">
-                        Search
+                        Save
                 </Button>
             </Form>
             :

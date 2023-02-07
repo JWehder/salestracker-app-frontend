@@ -15,6 +15,7 @@ function CustomerProvider( { children } ) {
         salesperson_first_name: "",
         salesperson_last_name: ""
     }
+    const [show, setShow] = useState(false)
     const { salespeople, setSalespeople, currentCustomers, setCurrentCustomers } = useContext(SalesContext)
     const [displayForm, setDisplayForm] = useState(false)
     const [customer, setCustomer] = useState({...defaultCustomerForm})
@@ -24,14 +25,20 @@ function CustomerProvider( { children } ) {
     // }, 0)
 
     function getSalespersonForCustomer(customerNumber, salespersonId) {
-        const salesperson = salespeople.find((salesperson) => salesperson.id === salespersonId)
-        const foundCustomer = salesperson.customers.find((cust) => cust.id == customerNumber)
-        setCustomer({
-            ...foundCustomer,
-            salesperson_first_name: salesperson.first_name,
-            salesperson_last_name: salesperson.last_name
-        })
-        setDisplayForm(!displayForm)
+            const salesperson = salespeople.find((salesperson) => salesperson.id === salespersonId)
+        if (salesperson) {
+            const foundCustomer = salesperson.customers.find((cust) => cust.id == customerNumber)
+            setCustomer({
+                ...foundCustomer,
+                salesperson_first_name: salesperson.first_name,
+                salesperson_last_name: salesperson.last_name
+            })
+            setDisplayForm(!displayForm)
+        } else {
+            return (
+                setShow(true)
+            )
+        }
     }
 
     function addCustomer(newCustomer) {
@@ -58,6 +65,8 @@ function CustomerProvider( { children } ) {
         setCurrentCustomers(newCurrentCustomers)
         setSalespeople(newSalespeople)
         setCustomer({...defaultCustomerForm})
+        setDisplayForm(!displayForm)
+
     }
 
     function removeDeletedCustomer(nonDeletedCustomers) {
@@ -125,22 +134,6 @@ function CustomerProvider( { children } ) {
             .then((salespersonsCustomers) => addEditedCustomer(editedCustomer.salesperson_id, salespersonsCustomers))
     }
 
-    function getCustomer(e) {
-        e.preventDefault()
-        // fetch(`http://localhost:9292/customers/${customer.id}`)
-        //     .then((resp) => resp.json())
-        //     .then((receivedCustomer) => setCustomer({
-        //         ...customer,
-        //         salesperson_id: receivedCustomer.salesperson_id,
-        //         customer_first_name: receivedCustomer.customer_first_name,
-        //         customer_last_name: receivedCustomer.customer_last_name,
-        //         units_sold: receivedCustomer.units_sold,
-        //         revenue: receivedCustomer.revenue,
-        //         salesperson: {...receivedCustomer.salesperson}
-        //     }))
-
-        setDisplayForm(!displayForm)
-    }
 
     function handleInputChange(e) {
         if (e.target.name === "salesperson_id") {
@@ -165,7 +158,7 @@ function CustomerProvider( { children } ) {
 
     // displayCustomers, customers, setCustomers, rev_total, currentCustomers, setCurrentCustomers
 
-    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, getCustomer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, defaultCustomerForm, displayCustomers }}>{children}</CustomerContext.Provider>
+    return <CustomerContext.Provider value={{ deleteCustomer, displayForm, handleInputChange, customer, setCustomer, createCustomer, getSalespersonForCustomer, editCustomer, defaultCustomerForm, displayCustomers, show, setShow }}>{children}</CustomerContext.Provider>
 }
 
 export { CustomerProvider, CustomerContext }

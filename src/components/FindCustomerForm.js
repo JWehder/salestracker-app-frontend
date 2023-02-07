@@ -5,10 +5,11 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import { SalesContext } from "../context/salesContext";
 import { CustomerContext } from "../context/customerContext";
+import Alert from 'react-bootstrap/Alert';
 
 function FindCustomerForm() {
     const { salespeopleOptions, salespeople } = useContext(SalesContext)
-    const { getSalespersonForCustomer } = useContext(CustomerContext)
+    const { getSalespersonForCustomer, show, setShow } = useContext(CustomerContext)
 
     const [salespersonDisplayed, setSalespersonDisplayed] = useState({
         salespersonId: 0,
@@ -51,9 +52,18 @@ function FindCustomerForm() {
                     </Form.Group>
                 </Row>
                 <Button variant= "primary" type="submit" className="mb-2">
-                    Submit
+                    Search
                 </Button>
             </Form>
+            { show ?
+            <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                <p>
+                 Please make sure what you entered is valid and try again.
+                </p>
+              </Alert>
+              :
+              ""
+            }
     </div>
     )
 
