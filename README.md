@@ -23,10 +23,6 @@ npm start
 
 Follow [this link](https://github.com/JWehder/phase-3-sinatra-react-projectt) and click fork in the top right to get started. In order to start messing around with this project in your favorite IDE, you can follow [this link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to discover how to clone a repository to your local desktop. Next, you should follow the directions outlined within the backend's README.
 
-## Usage
-
-In order to see a working form of my application as well as how to use it, I created a [YouTube Video!]()
-
 ## Contributing and Support
 
 For any major changes or questions, please feel free to reach out to me directly via email at jake.wehder@gmail.com.
